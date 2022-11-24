@@ -15,9 +15,7 @@ class GameAGQBARepository(
     val allTossups: Flow<List<Tossup>> = tossupDao.getTossups()
 
     @WorkerThread
-    suspend fun insertGame(game: Game) {
-        gameAGQBADao.insertGame(game)
-    }
+    suspend fun insertGame(game: Game): Long = gameAGQBADao.insertGame(game)
 
     @WorkerThread
     suspend fun insertGameAGQBA(gameAGQBA: GameAGQBA) {
@@ -26,4 +24,10 @@ class GameAGQBARepository(
             tossupDao.insertTossup(i)
         }
     }
+
+    @WorkerThread
+    suspend fun insertTossup(tossup: Tossup): Long = tossupDao.insertTossup(tossup)
+
+    @WorkerThread
+    suspend fun insertTossupList(tossups: List<Tossup>): List<Long> = tossupDao.insertTossupList(tossups)
 }

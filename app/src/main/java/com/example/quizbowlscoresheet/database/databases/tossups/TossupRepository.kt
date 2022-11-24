@@ -8,7 +8,8 @@ class TossupRepository(private val tossupDao: TossupDao) {
     val allTossups: Flow<List<Tossup>> = tossupDao.getTossups()
 
     @WorkerThread
-    suspend fun insert(tossup: Tossup) {
-        tossupDao.insertTossup(tossup)
-    }
+    suspend fun insert(tossup: Tossup): Long = tossupDao.insertTossup(tossup)
+
+    @WorkerThread
+    suspend fun insertList(tossups: List<Tossup>): List<Long> = tossupDao.insertTossupList(tossups)
 }

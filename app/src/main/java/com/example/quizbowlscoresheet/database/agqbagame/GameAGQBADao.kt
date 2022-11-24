@@ -16,5 +16,5 @@ interface GameAGQBADao {
     fun getGames(): Flow<List<GameAGQBA>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertGame(game: Game)
+    suspend fun insertGame(game: Game): Long
 }

@@ -17,22 +17,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        // TODO: Testing insertion. This should be replaced with a method in the viewmodel
-        for (i in 1..2) {
-            val tossups = List(5) { j ->
-                Tossup(
-                    null,
-                    i,
-                    j,
-                    1,
-                    TeamAnswered.NONE,
-                    "Hello world!"
-                )
-            }
-            val game = Game(null)
-            val gameAGQBA = GameAGQBA(game, tossups)
-            mainActivityViewModel.insertGameAGQBA(gameAGQBA)
-        }
+        // TODO: replace this with something real
+        mainActivityViewModel.newGameAGQBA()
         mainActivityViewModel.allGameAGQBA.observe(this) { games ->
             for (game in games) {
                 Log.d("MainActivity", game.toString())

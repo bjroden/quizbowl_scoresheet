@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "game_table")
 data class Game (
     @PrimaryKey(autoGenerate = true)
-    val id: Int?
+    val id: Long?
 )

@@ -16,10 +16,10 @@ import androidx.room.PrimaryKey
 )
 data class Tossup(
     @PrimaryKey(autoGenerate = true)
-    val id: Int?,
+    val id: Long?,
 
     @ColumnInfo(name = "game_id")
-    val gameId: Int?,
+    val gameId: Long?,
 
     @ColumnInfo(name = "question_number")
     val questionNumber: Int,

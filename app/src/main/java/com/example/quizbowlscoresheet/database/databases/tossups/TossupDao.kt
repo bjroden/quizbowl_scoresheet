@@ -13,5 +13,8 @@ interface TossupDao {
     fun getTossups(): Flow<List<Tossup>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertTossup(tossup: Tossup)
+    suspend fun insertTossup(tossup: Tossup): Long
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertTossupList(tossup: List<Tossup>): List<Long>
 }

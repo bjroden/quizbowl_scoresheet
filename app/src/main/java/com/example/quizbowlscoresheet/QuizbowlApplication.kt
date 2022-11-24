@@ -11,5 +11,5 @@ import kotlinx.coroutines.SupervisorJob
 class QuizbowlApplication: Application() {
     val applicationScope = CoroutineScope(SupervisorJob())
     val database by lazy { GameAGQBADatabase.getDatabase(this, applicationScope)}
-    val repository by lazy { GameAGQBARepository(database.gameDao()) }
+    val repository by lazy { GameAGQBARepository(database.gameDao(), database.tossupDao()) }
 }

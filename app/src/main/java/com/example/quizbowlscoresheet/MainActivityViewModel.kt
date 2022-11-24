@@ -3,12 +3,15 @@ package com.example.quizbowlscoresheet
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.*
 import com.example.quizbowlscoresheet.database.agqbagame.GameAGQBARepository
-import com.example.quizbowlscoresheet.database.models.Game
+import com.example.quizbowlscoresheet.database.models.GameAGQBA
 import kotlinx.coroutines.launch
 
-class MainActivityViewModel(private val tossupRepository: GameAGQBARepository): ViewModel() {
-    fun insert(game: Game) = viewModelScope.launch {
-        tossupRepository.insert(game)
+class MainActivityViewModel(private val gameAGQBARepository: GameAGQBARepository): ViewModel() {
+
+    val allGameAGQBA = gameAGQBARepository.allGameAGQBA.asLiveData()
+
+    fun insertGameAGQBA(game: GameAGQBA) = viewModelScope.launch {
+        gameAGQBARepository.insertGameAGQBA(game)
     }
 
     class TossupViewModelFactory(private val repository: GameAGQBARepository) : ViewModelProvider.Factory{

@@ -9,13 +9,11 @@ import com.example.quizbowlscoresheet.database.models.Game
 import com.example.quizbowlscoresheet.database.models.GameAGQBA
 import kotlinx.coroutines.flow.Flow
 
-// TODO: should use the connected GameAGQBA class instead of Game
-
 @Dao
 interface GameAGQBADao {
     @Transaction
     @Query("SELECT * from game_table")
-    fun getGames(): Flow<List<Game>>
+    fun getGames(): Flow<List<GameAGQBA>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGame(game: Game)

@@ -1,4 +1,4 @@
-package com.example.quizbowlscoresheet.database.databases.tossups
+package com.example.quizbowlscoresheet.database.daos
 
 import androidx.room.Dao
 import androidx.room.Insert

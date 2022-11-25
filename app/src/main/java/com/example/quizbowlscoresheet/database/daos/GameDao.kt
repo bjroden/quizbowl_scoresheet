@@ -1,4 +1,4 @@
-package com.example.quizbowlscoresheet.database.agqbagame
+package com.example.quizbowlscoresheet.database.daos
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -10,7 +10,7 @@ import com.example.quizbowlscoresheet.database.models.GameAGQBA
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface GameAGQBADao {
+interface GameDao {
     @Transaction
     @Query("SELECT * from game_table")
     fun getGames(): Flow<List<GameAGQBA>>

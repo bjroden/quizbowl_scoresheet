@@ -1,11 +1,12 @@
-package com.example.quizbowlscoresheet.database.agqbagame
+package com.example.quizbowlscoresheet.database.repositories.agqbagame
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.quizbowlscoresheet.database.databases.tossups.TeamDao
-import com.example.quizbowlscoresheet.database.databases.tossups.TossupDao
+import com.example.quizbowlscoresheet.database.daos.GameDao
+import com.example.quizbowlscoresheet.database.daos.TeamDao
+import com.example.quizbowlscoresheet.database.daos.TossupDao
 import com.example.quizbowlscoresheet.database.models.Game
 import com.example.quizbowlscoresheet.database.models.Team
 import com.example.quizbowlscoresheet.database.models.Tossup
@@ -13,7 +14,7 @@ import kotlinx.coroutines.CoroutineScope
 
 @Database(entities = arrayOf(Game::class, Tossup::class, Team::class), version = 1, exportSchema = false)
 public abstract class GameAGQBADatabase: RoomDatabase() {
-    abstract fun gameDao(): GameAGQBADao
+    abstract fun gameDao(): GameDao
     abstract fun tossupDao(): TossupDao
     abstract fun teamDao(): TeamDao
 

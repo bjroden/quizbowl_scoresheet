@@ -1,8 +1,9 @@
-package com.example.quizbowlscoresheet.database.agqbagame
+package com.example.quizbowlscoresheet.database.repositories.agqbagame
 
 import androidx.annotation.WorkerThread
-import com.example.quizbowlscoresheet.database.databases.tossups.TeamDao
-import com.example.quizbowlscoresheet.database.databases.tossups.TossupDao
+import com.example.quizbowlscoresheet.database.daos.GameDao
+import com.example.quizbowlscoresheet.database.daos.TeamDao
+import com.example.quizbowlscoresheet.database.daos.TossupDao
 import com.example.quizbowlscoresheet.database.models.Game
 import com.example.quizbowlscoresheet.database.models.GameAGQBA
 import com.example.quizbowlscoresheet.database.models.Team
@@ -10,20 +11,20 @@ import com.example.quizbowlscoresheet.database.models.Tossup
 import kotlinx.coroutines.flow.Flow
 
 class GameAGQBARepository(
-    private val gameAGQBADao: GameAGQBADao,
+    private val gameDao: GameDao,
     private val tossupDao: TossupDao,
     private val teamDao: TeamDao
 ) {
-    val allGameAGQBA: Flow<List<GameAGQBA>> = gameAGQBADao.getGames()
+    val allGameAGQBA: Flow<List<GameAGQBA>> = gameDao.getGames()
     val allTossups: Flow<List<Tossup>> = tossupDao.getTossups()
     val allTeams: Flow<List<Team>> = teamDao.getTeams()
 
     @WorkerThread
-    suspend fun insertGame(game: Game): Long = gameAGQBADao.insertGame(game)
+    suspend fun insertGame(game: Game): Long = gameDao.insertGame(game)
 
     @WorkerThread
     suspend fun insertGameAGQBA(gameAGQBA: GameAGQBA) {
-        gameAGQBADao.insertGame(gameAGQBA.game)
+        gameDao.insertGame(gameAGQBA.game)
         for (i in gameAGQBA.tossups) {
             tossupDao.insertTossup(i)
         }

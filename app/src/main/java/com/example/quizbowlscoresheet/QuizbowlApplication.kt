@@ -1,10 +1,8 @@
 package com.example.quizbowlscoresheet
 
 import android.app.Application
-import com.example.quizbowlscoresheet.database.agqbagame.GameAGQBADatabase
-import com.example.quizbowlscoresheet.database.agqbagame.GameAGQBARepository
-import com.example.quizbowlscoresheet.database.databases.tossups.TossupDatabase
-import com.example.quizbowlscoresheet.database.databases.tossups.TossupRepository
+import com.example.quizbowlscoresheet.database.repositories.agqbagame.GameAGQBADatabase
+import com.example.quizbowlscoresheet.database.repositories.agqbagame.GameAGQBARepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 

@@ -2,7 +2,7 @@ package com.example.quizbowlscoresheet
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.*
-import com.example.quizbowlscoresheet.database.agqbagame.GameAGQBARepository
+import com.example.quizbowlscoresheet.database.repositories.agqbagame.GameAGQBARepository
 import com.example.quizbowlscoresheet.database.models.*
 import kotlinx.coroutines.launch
 

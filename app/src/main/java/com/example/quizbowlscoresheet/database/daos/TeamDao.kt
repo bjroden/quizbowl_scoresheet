@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TeamDao {
-    @Query("SELECT * FROM team_table order by id ASC")
+    @Query("SELECT * FROM Team order by id ASC")
     fun getTeams(): Flow<List<Team>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

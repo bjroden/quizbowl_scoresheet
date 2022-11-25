@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface GameDao {
     @Transaction
-    @Query("SELECT * from game_table")
+    @Query("SELECT * from Game")
     fun getGames(): Flow<List<GameAGQBA>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

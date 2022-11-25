@@ -3,12 +3,10 @@ package com.example.quizbowlscoresheet.database.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "game_table")
-data class Game (
+@Entity(tableName = "team_table")
+data class Team(
     @PrimaryKey(autoGenerate = true)
     val id: Long?,
 
-    val team1Id: Long?,
-
-    val team2Id: Long?
+    val name: String
 )

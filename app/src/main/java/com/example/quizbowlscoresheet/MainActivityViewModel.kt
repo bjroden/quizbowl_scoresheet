@@ -3,10 +3,7 @@ package com.example.quizbowlscoresheet
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.*
 import com.example.quizbowlscoresheet.database.agqbagame.GameAGQBARepository
-import com.example.quizbowlscoresheet.database.models.Game
-import com.example.quizbowlscoresheet.database.models.GameAGQBA
-import com.example.quizbowlscoresheet.database.models.TeamAnswered
-import com.example.quizbowlscoresheet.database.models.Tossup
+import com.example.quizbowlscoresheet.database.models.*
 import kotlinx.coroutines.launch
 
 class MainActivityViewModel(private val gameAGQBARepository: GameAGQBARepository): ViewModel() {
@@ -18,7 +15,10 @@ class MainActivityViewModel(private val gameAGQBARepository: GameAGQBARepository
     }
 
     fun newGameAGQBA() = viewModelScope.launch {
-        val gameId = gameAGQBARepository.insertGame(Game(null))
+        // TODO: have real team input
+        val team1 = gameAGQBARepository.insertTeam(Team(null, "team 1!"))
+        val team2 = gameAGQBARepository.insertTeam(Team(null, "team 2!"))
+        val gameId = gameAGQBARepository.insertGame(Game(null, team1, team2))
         val round1Tossups = List(20) { questionNumber ->
             Tossup(
                 null,

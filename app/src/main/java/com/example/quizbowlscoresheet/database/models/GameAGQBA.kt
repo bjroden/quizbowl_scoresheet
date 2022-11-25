@@ -11,5 +11,17 @@ data class GameAGQBA(
         parentColumn = "id",
         entityColumn = "game_id"
     )
-    val tossups: List<Tossup>
+    val tossups: List<Tossup>,
+
+    @Relation(
+        parentColumn = "team1Id",
+        entityColumn = "id"
+    )
+    val team1: Team,
+
+    @Relation(
+        parentColumn = "team2Id",
+        entityColumn = "id"
+    )
+    val team2: Team
 )

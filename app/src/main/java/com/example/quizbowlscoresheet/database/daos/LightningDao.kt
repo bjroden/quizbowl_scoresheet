@@ -12,7 +12,7 @@ interface LightningDao {
     suspend fun insertLightningQuestion(question: LightningQuestion): Long
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertLightningQuestions(questions: List<LightningQuestion>): List<Long>
+    suspend fun insertLightningQuestionList(questions: List<LightningQuestion>): List<Long>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLightningCategoryInfo(info: LightningCategoryInfo): Long

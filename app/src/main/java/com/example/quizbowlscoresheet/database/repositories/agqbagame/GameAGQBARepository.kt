@@ -15,11 +15,6 @@ class GameAGQBARepository(
     private val lightningDao = database.lightningDao()
 
     val allGameAGQBA: Flow<List<GameAGQBA>> = gameDao.getGames()
-    val allTossups: Flow<List<Tossup>> = tossupDao.getTossups()
-    val allTeams: Flow<List<Team>> = teamDao.getTeams()
-
-    @WorkerThread
-    suspend fun insertGame(game: Game): Long = gameDao.insertGame(game)
 
     @WorkerThread
     suspend fun insertGameAGQBA(gameAGQBA: GameAGQBA) {
@@ -30,42 +25,67 @@ class GameAGQBARepository(
     }
 
     @WorkerThread
-    suspend fun insertTossup(tossup: Tossup): Long = tossupDao.insertTossup(tossup)
-
-    @WorkerThread
-    suspend fun insertTossupList(tossups: List<Tossup>): List<Long> = tossupDao.insertTossupList(tossups)
-
-    @WorkerThread
-    suspend fun insertTeam(team: Team): Long = teamDao.insertTeam(team)
-
-    @WorkerThread
-    suspend fun insertTeamList(teams: List<Team>): List<Long> = teamDao.insertTeamList(teams)
-
-    @WorkerThread
-    suspend fun insertBonusQuestion(bonusQuestion: BonusQuestion): Long = bonusDao.insertBonusQuestion(bonusQuestion)
-
-    @WorkerThread
-    suspend fun insertBonusQuestions(bonusQuestions: List<BonusQuestion>): List<Long> = bonusDao.insertBonusQuestions(bonusQuestions)
-
-    @WorkerThread
-    suspend fun insertBonusCategoryInfo(bonusCategoryInfo: BonusCategoryInfo): Long = bonusDao.insertBonusCategoryInfo(bonusCategoryInfo)
-
-    @WorkerThread
-    suspend fun insertBonusCategoryInfoList(list: List<BonusCategoryInfo>): List<Long> = bonusDao.insertBonusCategoryInfoList(list)
-
-    @WorkerThread
-    suspend fun insertLightningCategoryList(list: List<LightningCategoryInfo>): List<Long> = lightningDao.insertLightningCategoryInfoList(list)
-
-    @WorkerThread
-    suspend fun insertLightningQuestionList(list: List<LightningQuestion>): List<Long> = lightningDao.insertLightningQuestions(list)
-
-    @WorkerThread
     suspend fun newGameAGQBA() = database.withTransaction {
         // TODO: have real team input
-        val team1 = insertTeam(Team(null, "team 1!"))
-        val team2 = insertTeam(Team(null, "team 2!"))
-        val gameId = insertGame(Game(null, team1, team2))
-        val round1Tossups = List(20) { questionNumber ->
+        val team1 = teamDao.insertTeam(Team(null, "team 1!"))
+        val team2 = teamDao.insertTeam(Team(null, "team 2!"))
+        val gameId = gameDao.insertGame(Game(null, team1, team2))
+        val tossups = blankAGQBATossups(gameId)
+        tossupDao.insertTossupList(tossups)
+        val bonusCategories = blankBonusCategories(gameId)
+        val categoryIds = bonusDao.insertBonusCategoryInfoList(bonusCategories)
+        val bonusQuestions = categoryIds.flatMap { blankBonusQuestions(it) }
+        bonusDao.insertBonusQuestions(bonusQuestions)
+        val lightningRounds = listOf(
+            blankLightningCategory(gameId, TeamAnswered.TEAM1),
+            blankLightningCategory(gameId, TeamAnswered.TEAM2)
+        )
+        val lightningIds = lightningDao.insertLightningCategoryInfoList(lightningRounds)
+        val lightningQuestions = lightningIds.flatMap { blankLightningQuestions(it) }
+        lightningDao.insertLightningQuestionList(lightningQuestions)
+    }
+
+    private fun blankBonusCategories(gameId: Long) = List(4) { categoryNumber ->
+            BonusCategoryInfo(
+                null,
+                gameId,
+                categoryNumber,
+                null
+            )
+        }
+
+    private fun blankBonusQuestions(categoryId: Long) = List(4) { questionNumber ->
+            BonusQuestion(
+                categoryId,
+                questionNumber,
+                false,
+                null
+            )
+        }
+
+    private fun blankLightningCategory(gameId: Long, team: TeamAnswered) =
+        LightningCategoryInfo(
+            null,
+            gameId,
+            team,
+            null
+        )
+
+
+    private fun blankLightningQuestions(lightningId: Long) = List(10) { questionNumber ->
+            LightningQuestion(
+                lightningId,
+                questionNumber,
+                LightningAnswer.STALLED,
+                null
+            )
+        }
+
+    private fun blankAGQBATossups(gameId: Long) =
+        listOf(blankRound1Tossups(gameId), blankRound2Tossups(gameId), blankRound4Tossups(gameId))
+            .flatten()
+
+    private fun blankRound1Tossups(gameId: Long) = (1..20).map { questionNumber ->
             Tossup(
                 null,
                 gameId,
@@ -75,52 +95,26 @@ class GameAGQBARepository(
                 null
             )
         }
-        insertTossupList(round1Tossups)
-        val bonusCategories = List(4) { categoryNumber ->
-            BonusCategoryInfo(
-                null,
-                gameId,
-                categoryNumber,
-                null
-            )
-        }
-        val categoryIds = insertBonusCategoryInfoList(bonusCategories)
-        val bonusQuestions = categoryIds.flatMap { id ->
-            List(4) { questionNumber ->
-                BonusQuestion(
-                    id,
-                    questionNumber,
-                    false,
-                    null
-                )
-            }
-        }
-        insertBonusQuestions(bonusQuestions)
-        val lightningRounds = listOf(
-            LightningCategoryInfo(
-                null,
-                gameId,
-                TeamAnswered.TEAM1,
-                null
-            ),
-            LightningCategoryInfo(
-                null,
-                gameId,
-                TeamAnswered.TEAM2,
-                null
-            )
+
+    private fun blankRound2Tossups(gameId: Long) = (21..30).map { questionNumber ->
+        Tossup(
+            null,
+            gameId,
+            questionNumber,
+            2,
+            TeamAnswered.NONE,
+            null
         )
-        val lightningIds = insertLightningCategoryList(lightningRounds)
-        val lightningQuestions = lightningIds.flatMap { id ->
-            List(10) { questionNumber ->
-                LightningQuestion(
-                    id,
-                    questionNumber,
-                    LightningAnswer.STALLED,
-                    null
-                )
-            }
-        }
-        insertLightningQuestionList(lightningQuestions)
+    }
+
+    private fun blankRound4Tossups(gameId: Long) = (31..50).map { questionNumber ->
+        Tossup(
+            null,
+            gameId,
+            questionNumber,
+            4,
+            TeamAnswered.NONE,
+            null
+        )
     }
 }

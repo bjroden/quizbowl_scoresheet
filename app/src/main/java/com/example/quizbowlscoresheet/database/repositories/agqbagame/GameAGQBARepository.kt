@@ -17,14 +17,6 @@ class GameAGQBARepository(
     val allGameAGQBA: Flow<List<GameAGQBA>> = gameDao.getGames()
 
     @WorkerThread
-    suspend fun insertGameAGQBA(gameAGQBA: GameAGQBA) {
-        gameDao.insertGame(gameAGQBA.game)
-        for (i in gameAGQBA.tossups) {
-            tossupDao.insertTossup(i)
-        }
-    }
-
-    @WorkerThread
     suspend fun newGameAGQBA() = database.withTransaction {
         // TODO: have real team input
         val team1 = teamDao.insertTeam(Team(null, "team 1!"))

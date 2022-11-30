@@ -10,10 +10,6 @@ class MainActivityViewModel(private val gameAGQBARepository: GameAGQBARepository
 
     val allGameAGQBA = gameAGQBARepository.allGameAGQBA.asLiveData()
 
-    fun insertGameAGQBA(game: GameAGQBA) = viewModelScope.launch {
-        gameAGQBARepository.insertGameAGQBA(game)
-    }
-
     fun newGameAGQBA() = viewModelScope.launch {
         gameAGQBARepository.newGameAGQBA()
     }

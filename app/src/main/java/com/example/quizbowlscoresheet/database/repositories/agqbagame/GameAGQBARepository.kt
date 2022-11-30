@@ -37,7 +37,7 @@ class GameAGQBARepository(
         lightningDao.insertLightningQuestionList(lightningQuestions)
     }
 
-    private fun blankBonusCategories(gameId: Long) = List(4) { categoryNumber ->
+    private fun blankBonusCategories(gameId: Long) = (1..4).map { categoryNumber ->
             BonusCategoryInfo(
                 null,
                 gameId,
@@ -46,7 +46,7 @@ class GameAGQBARepository(
             )
         }
 
-    private fun blankBonusQuestions(categoryId: Long) = List(4) { questionNumber ->
+    private fun blankBonusQuestions(categoryId: Long) = (1..4).map { questionNumber ->
             BonusQuestion(
                 categoryId,
                 questionNumber,
@@ -64,7 +64,7 @@ class GameAGQBARepository(
         )
 
 
-    private fun blankLightningQuestions(lightningId: Long) = List(10) { questionNumber ->
+    private fun blankLightningQuestions(lightningId: Long) = (1..10).map { questionNumber ->
             LightningQuestion(
                 lightningId,
                 questionNumber,

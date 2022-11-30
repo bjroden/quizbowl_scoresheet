@@ -4,10 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.quizbowlscoresheet.database.daos.BonusDao
-import com.example.quizbowlscoresheet.database.daos.GameDao
-import com.example.quizbowlscoresheet.database.daos.TeamDao
-import com.example.quizbowlscoresheet.database.daos.TossupDao
+import com.example.quizbowlscoresheet.database.daos.*
 import com.example.quizbowlscoresheet.database.models.*
 import kotlinx.coroutines.CoroutineScope
 
@@ -17,7 +14,9 @@ import kotlinx.coroutines.CoroutineScope
         Tossup::class,
         Team::class,
         BonusCategoryInfo::class,
-        BonusQuestion::class
+        BonusQuestion::class,
+        LightningCategoryInfo::class,
+        LightningQuestion::class
     ),
     version = 1,
     exportSchema = false)
@@ -26,6 +25,7 @@ public abstract class GameAGQBADatabase: RoomDatabase() {
     abstract fun tossupDao(): TossupDao
     abstract fun teamDao(): TeamDao
     abstract fun bonusDao(): BonusDao
+    abstract fun lightningDao(): LightningDao
 
     companion object {
         // Singleton prevents multiple instances of database opening at the same time

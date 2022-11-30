@@ -12,6 +12,7 @@ class GameAGQBARepository(
     private val tossupDao = database.tossupDao()
     private val teamDao = database.teamDao()
     private val bonusDao = database.bonusDao()
+    private val lightningDao = database.lightningDao()
 
     val allGameAGQBA: Flow<List<GameAGQBA>> = gameDao.getGames()
     val allTossups: Flow<List<Tossup>> = tossupDao.getTossups()
@@ -53,6 +54,12 @@ class GameAGQBARepository(
     suspend fun insertBonusCategoryInfoList(list: List<BonusCategoryInfo>): List<Long> = bonusDao.insertBonusCategoryInfoList(list)
 
     @WorkerThread
+    suspend fun insertLightningCategoryList(list: List<LightningCategoryInfo>): List<Long> = lightningDao.insertLightningCategoryInfoList(list)
+
+    @WorkerThread
+    suspend fun insertLightningQuestionList(list: List<LightningQuestion>): List<Long> = lightningDao.insertLightningQuestions(list)
+
+    @WorkerThread
     suspend fun newGameAGQBA() = database.withTransaction {
         // TODO: have real team input
         val team1 = insertTeam(Team(null, "team 1!"))
@@ -89,5 +96,31 @@ class GameAGQBARepository(
             }
         }
         insertBonusQuestions(bonusQuestions)
+        val lightningRounds = listOf(
+            LightningCategoryInfo(
+                null,
+                gameId,
+                TeamAnswered.TEAM1,
+                null
+            ),
+            LightningCategoryInfo(
+                null,
+                gameId,
+                TeamAnswered.TEAM2,
+                null
+            )
+        )
+        val lightningIds = insertLightningCategoryList(lightningRounds)
+        val lightningQuestions = lightningIds.flatMap { id ->
+            List(10) { questionNumber ->
+                LightningQuestion(
+                    id,
+                    questionNumber,
+                    LightningAnswer.STALLED,
+                    null
+                )
+            }
+        }
+        insertLightningQuestionList(lightningQuestions)
     }
 }

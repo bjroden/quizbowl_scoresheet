@@ -21,6 +21,13 @@ data class GameAGQBA(
     val bonusCategories: List<BonusCategory>,
 
     @Relation(
+        entity= LightningCategoryInfo::class,
+        parentColumn = "id",
+        entityColumn = "gameId"
+    )
+    val lightningCategories: List<LightningCategory>,
+
+    @Relation(
         parentColumn = "team1Id",
         entityColumn = "id"
     )

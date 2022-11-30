@@ -4,10 +4,10 @@ import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 
 enum class LightningAnswer {
-    CORRECT,
-    INCORRECT,
-    BOUNCED_BACK,
-    STALLED
+    CORRECT,        // Team got it
+    INCORRECT,      // Neither team got it
+    BOUNCED_BACK,   // Team missed, other team got it
+    STALLED         // Stall
 }
 
 @ProvidedTypeConverter

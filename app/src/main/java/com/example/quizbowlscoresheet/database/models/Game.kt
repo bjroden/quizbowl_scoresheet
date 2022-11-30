@@ -12,6 +12,12 @@ import androidx.room.PrimaryKey
             parentColumns = arrayOf("id"),
             childColumns = arrayOf("team1Id"),
             onDelete = SET_NULL
+        ),
+        ForeignKey(
+            entity = Team::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("team2Id"),
+            onDelete = SET_NULL
         )
     )
 )

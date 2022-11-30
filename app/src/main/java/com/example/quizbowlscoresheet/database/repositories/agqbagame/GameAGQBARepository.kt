@@ -11,6 +11,7 @@ class GameAGQBARepository(
     private val gameDao = database.gameDao()
     private val tossupDao = database.tossupDao()
     private val teamDao = database.teamDao()
+    private val bonusDao = database.bonusDao()
 
     val allGameAGQBA: Flow<List<GameAGQBA>> = gameDao.getGames()
     val allTossups: Flow<List<Tossup>> = tossupDao.getTossups()
@@ -40,6 +41,18 @@ class GameAGQBARepository(
     suspend fun insertTeamList(teams: List<Team>): List<Long> = teamDao.insertTeamList(teams)
 
     @WorkerThread
+    suspend fun insertBonusQuestion(bonusQuestion: BonusQuestion): Long = bonusDao.insertBonusQuestion(bonusQuestion)
+
+    @WorkerThread
+    suspend fun insertBonusQuestions(bonusQuestions: List<BonusQuestion>): List<Long> = bonusDao.insertBonusQuestions(bonusQuestions)
+
+    @WorkerThread
+    suspend fun insertBonusCategoryInfo(bonusCategoryInfo: BonusCategoryInfo): Long = bonusDao.insertBonusCategoryInfo(bonusCategoryInfo)
+
+    @WorkerThread
+    suspend fun insertBonusCategoryInfoList(list: List<BonusCategoryInfo>): List<Long> = bonusDao.insertBonusCategoryInfoList(list)
+
+    @WorkerThread
     suspend fun newGameAGQBA() = database.withTransaction {
         // TODO: have real team input
         val team1 = insertTeam(Team(null, "team 1!"))
@@ -56,5 +69,25 @@ class GameAGQBARepository(
             )
         }
         insertTossupList(round1Tossups)
+        val bonusCategories = List(4) { categoryNumber ->
+            BonusCategoryInfo(
+                null,
+                gameId,
+                categoryNumber,
+                null
+            )
+        }
+        val categoryIds = insertBonusCategoryInfoList(bonusCategories)
+        val bonusQuestions = categoryIds.flatMap { id ->
+            List(4) { questionNumber ->
+                BonusQuestion(
+                    id,
+                    questionNumber,
+                    false,
+                    null
+                )
+            }
+        }
+        insertBonusQuestions(bonusQuestions)
     }
 }

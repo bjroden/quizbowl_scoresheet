@@ -14,6 +14,13 @@ data class GameAGQBA(
     val tossups: List<Tossup>,
 
     @Relation(
+        entity = BonusCategoryInfo::class,
+        parentColumn = "id",
+        entityColumn = "gameId"
+    )
+    val bonusCategories: List<BonusCategory>,
+
+    @Relation(
         parentColumn = "team1Id",
         entityColumn = "id"
     )

@@ -1,9 +1,20 @@
 package com.example.quizbowlscoresheet.database.models
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.SET_NULL
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(
+    foreignKeys = arrayOf(
+        ForeignKey(
+            entity = Team::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("team1Id"),
+            onDelete = SET_NULL
+        )
+    )
+)
 data class Game (
     @PrimaryKey(autoGenerate = true)
     val id: Long?,

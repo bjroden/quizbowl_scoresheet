@@ -23,5 +23,11 @@ data class GameAGQBA(
         parentColumn = "team2Id",
         entityColumn = "id"
     )
-    val team2: Team
+    val team2: Team,
+
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "gameId"
+    )
+    val rounds: RoundsAGQBAInfo
 )

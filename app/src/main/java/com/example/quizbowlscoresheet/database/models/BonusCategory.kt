@@ -21,6 +21,8 @@ data class BonusCategoryInfo(
 
     val categoryNumber: Int,
 
+    val team: TeamAnswered,
+
     val name: String?,
 )
 

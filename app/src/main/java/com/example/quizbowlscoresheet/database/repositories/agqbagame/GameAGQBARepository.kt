@@ -42,6 +42,7 @@ class GameAGQBARepository(
                 null,
                 gameId,
                 categoryNumber,
+                TeamAnswered.NONE,
                 null
             )
         }

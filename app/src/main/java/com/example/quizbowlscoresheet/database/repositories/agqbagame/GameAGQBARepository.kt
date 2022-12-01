@@ -37,6 +37,8 @@ class GameAGQBARepository(
         lightningDao.insertLightningQuestionList(lightningQuestions)
     }
 
+    fun getGameAGQBAById(id: Long) = gameDao.getGameById(id)
+
     private fun blankBonusCategories(gameId: Long) = (1..4).map { categoryNumber ->
             BonusCategoryInfo(
                 null,

@@ -3,41 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tossupNum"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="" />
+            android:layout_height="match_parent"
+            android:minWidth="50dp"
+            android:text=""
+            android:textSize="34sp" />
 
         <RadioGroup
             android:id="@+id/tossupRadioGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:orientation='horizontal'>
 
             <RadioButton
                 android:id="@+id/Team1Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="" />
 
             <RadioButton
                 android:id="@+id/Team2Button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="" />
 
             <RadioButton
                 android:id="@+id/MissedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="" />
         </RadioGroup>
     </LinearLayout>

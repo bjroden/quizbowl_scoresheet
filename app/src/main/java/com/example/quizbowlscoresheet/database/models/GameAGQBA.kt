@@ -1,6 +1,7 @@
 package com.example.quizbowlscoresheet.database.models
 
 import androidx.room.Embedded
+import androidx.room.Ignore
 import androidx.room.Relation
 
 data class GameAGQBA(
@@ -39,20 +40,20 @@ data class GameAGQBA(
     )
     val team2: Team?
 ) {
-    val round1Tossups by lazy { tossups.filter { it.roundNumber == 1 } }
-    val round2Tossups by lazy { tossups.filter { it.roundNumber == 2 } }
-    val round4Tossups by lazy { tossups.filter { it.roundNumber == 4 } }
+    @delegate:Ignore val round1Tossups by lazy { tossups.filter { it.roundNumber == 1 } }
+    @delegate:Ignore val round2Tossups by lazy { tossups.filter { it.roundNumber == 2 } }
+    @delegate:Ignore val round4Tossups by lazy { tossups.filter { it.roundNumber == 4 } }
 
-    val team1LightningRound by lazy { lightningCategories.find { it.categoryInfo.team == TeamAnswered.TEAM1 } }
-    val team2LightningRound by lazy { lightningCategories.find { it.categoryInfo.team == TeamAnswered.TEAM2 } }
+    @delegate:Ignore val team1LightningRound by lazy { lightningCategories.find { it.categoryInfo.team == TeamAnswered.TEAM1 } }
+    @delegate:Ignore val team2LightningRound by lazy { lightningCategories.find { it.categoryInfo.team == TeamAnswered.TEAM2 } }
 
-    val team1Round1Score by lazy { round1Score(TeamAnswered.TEAM1) }
-    val team1Round2Score by lazy { round2Score(TeamAnswered.TEAM1) }
-    val team1Round4Score by lazy { round4Score(TeamAnswered.TEAM1) }
+    @delegate:Ignore val team1Round1Score by lazy { round1Score(TeamAnswered.TEAM1) }
+    @delegate:Ignore val team1Round2Score by lazy { round2Score(TeamAnswered.TEAM1) }
+    @delegate:Ignore val team1Round4Score by lazy { round4Score(TeamAnswered.TEAM1) }
 
-    val team2Round1Score by lazy { round1Score(TeamAnswered.TEAM2) }
-    val team2Round2Score by lazy { round2Score(TeamAnswered.TEAM2) }
-    val team2Round4Score by lazy { round4Score(TeamAnswered.TEAM2) }
+    @delegate:Ignore val team2Round1Score by lazy { round1Score(TeamAnswered.TEAM2) }
+    @delegate:Ignore val team2Round2Score by lazy { round2Score(TeamAnswered.TEAM2) }
+    @delegate:Ignore val team2Round4Score by lazy { round4Score(TeamAnswered.TEAM2) }
 
     fun roundNTossups(n: Int) = tossups.filter { it.roundNumber == n }
 

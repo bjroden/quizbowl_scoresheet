@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.quizbowlscoresheet.database.models.Tossup
 import kotlinx.coroutines.flow.Flow
 
@@ -17,4 +18,7 @@ interface TossupDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTossupList(tossup: List<Tossup>): List<Long>
+
+    @Update
+    suspend fun updateTossup(tossup: Tossup)
 }

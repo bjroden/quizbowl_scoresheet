@@ -39,6 +39,16 @@ class GameAGQBARepository(
 
     fun getGameAGQBAById(id: Long) = gameDao.getGameById(id)
 
+    suspend fun updateTossup(tossup: Tossup) = tossupDao.updateTossup(tossup)
+
+    suspend fun updateBonusQuestion(bonusQuestion: BonusQuestion) = bonusDao.updateBonusQuestion(bonusQuestion)
+
+    suspend fun updateBonusCategoryInfo(bonusCategoryInfo: BonusCategoryInfo) = bonusDao.updateBonusCategoryInfo(bonusCategoryInfo)
+
+    suspend fun updateLightningQuestion(lightningQuestion: LightningQuestion) = lightningDao.updateLightningQuestion(lightningQuestion)
+
+    suspend fun updateLightningCategoryInfo(lightningCategoryInfo: LightningCategoryInfo) = lightningDao.updateLightningCategoryInfo(lightningCategoryInfo)
+
     private fun blankBonusCategories(gameId: Long) = (1..4).map { categoryNumber ->
             BonusCategoryInfo(
                 null,

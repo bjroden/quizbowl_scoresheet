@@ -3,6 +3,7 @@ package com.example.quizbowlscoresheet.database.daos
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
+import androidx.room.Update
 import com.example.quizbowlscoresheet.database.models.LightningCategoryInfo
 import com.example.quizbowlscoresheet.database.models.LightningQuestion
 
@@ -19,4 +20,10 @@ interface LightningDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLightningCategoryInfoList(list: List<LightningCategoryInfo>): List<Long>
+
+    @Update
+    suspend fun updateLightningQuestion(lightningQuestion: LightningQuestion)
+
+    @Update
+    suspend fun updateLightningCategoryInfo(lightningCategoryInfo: LightningCategoryInfo)
 }

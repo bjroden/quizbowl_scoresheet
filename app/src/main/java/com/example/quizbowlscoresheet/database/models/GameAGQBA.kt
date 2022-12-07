@@ -49,10 +49,12 @@ data class GameAGQBA(
 
     @delegate:Ignore val team1Round1Score by lazy { round1Score(TeamAnswered.TEAM1) }
     @delegate:Ignore val team1Round2Score by lazy { round2Score(TeamAnswered.TEAM1) }
+    @delegate:Ignore val team1Round3Score by lazy { round3Score(TeamAnswered.TEAM1) }
     @delegate:Ignore val team1Round4Score by lazy { round4Score(TeamAnswered.TEAM1) }
 
     @delegate:Ignore val team2Round1Score by lazy { round1Score(TeamAnswered.TEAM2) }
     @delegate:Ignore val team2Round2Score by lazy { round2Score(TeamAnswered.TEAM2) }
+    @delegate:Ignore val team2Round3Score by lazy { round3Score(TeamAnswered.TEAM1) }
     @delegate:Ignore val team2Round4Score by lazy { round4Score(TeamAnswered.TEAM2) }
 
     fun roundNTossups(n: Int) = tossups.filter { it.roundNumber == n }
@@ -63,6 +65,21 @@ data class GameAGQBA(
         val bonusScore = 5 * bonusCategories.filter { it.categoryInfo.team == team }
             .sumOf { it.bonusQuestions.count { q -> q.answered } }
         return tossupsScore + bonusScore
+    }
+    fun round3Score(team: TeamAnswered): Int {
+        val oppositeTeam = when (team) {
+            TeamAnswered.TEAM1 -> TeamAnswered.TEAM2
+            TeamAnswered.TEAM2 -> TeamAnswered.TEAM1
+            else -> throw IllegalArgumentException("Cannot be NONE")
+        }
+        val numCorrect = lightningCategories.find { it.categoryInfo.team == team }
+            ?.questions?.count { it.answer == LightningAnswer.CORRECT }
+            ?: 0
+        val numBounceBacks = lightningCategories.find { it.categoryInfo.team == oppositeTeam }
+            ?.questions?.count { it.answer == LightningAnswer.BOUNCED_BACK }
+            ?: 0
+        val bonus = if (numCorrect == 10) 20 else 0
+        return 10 * (numCorrect + numBounceBacks) + bonus
     }
     fun round4Score(team: TeamAnswered) = 10 * round4Tossups.count { it.team == team }
 }

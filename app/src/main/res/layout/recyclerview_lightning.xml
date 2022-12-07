@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/tossupNum"
+            android:id="@+id/lightningNum"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:minWidth="50dp"
@@ -22,7 +22,7 @@
             android:textSize="34sp" />
 
         <RadioGroup
-            android:id="@+id/tossupRadioGroup"
+            android:id="@+id/lightningRadioGroup"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation='horizontal'>

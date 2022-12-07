@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.quizbowlscoresheet.database.models.LightningAnswer
+import com.example.quizbowlscoresheet.database.models.LightningQuestion
 import com.example.quizbowlscoresheet.database.models.TeamAnswered
 import com.example.quizbowlscoresheet.database.models.Tossup
 
@@ -18,6 +20,8 @@ class GameQuarterActivity : AppCompatActivity() {
                 val recyclerView = findViewById<RecyclerView>(R.id.questionRecycler)
                 recyclerView.adapter = adapter
                 recyclerView.layoutManager = GridLayoutManager(this, 4, RecyclerView.HORIZONTAL, false)
+
+                //replace tossupList with the actual list of questions
                 var tossupList = listOf<Tossup>(
                     Tossup(1,1, 1, 1, TeamAnswered.TEAM1, "lib"),
                     Tossup(2,1, 2, 1, TeamAnswered.TEAM1, "lib"),
@@ -26,8 +30,41 @@ class GameQuarterActivity : AppCompatActivity() {
                 )
                 adapter.submitList(tossupList)
             }
-            2 -> setContentView(R.layout.activity_game_bonus)
-            3 -> setContentView(R.layout.activity_game_lightning)
+            2 -> {
+                setContentView(R.layout.activity_game_bonus)
+//                val adapter = BonusAdapter(this::questionAnswered)
+//                val recyclerView = findViewById<RecyclerView>(R.id.questionRecycler)
+//                recyclerView.adapter = adapter
+//                recyclerView.layoutManager = GridLayoutManager(this, 4, RecyclerView.HORIZONTAL, false)
+//                var tossupList = listOf<Tossup>(
+//                    Tossup(1,1, 1, 1, TeamAnswered.TEAM1, "lib"),
+//                    Tossup(2,1, 2, 1, TeamAnswered.TEAM1, "lib"),
+//                    Tossup(3,1, 3, 1, TeamAnswered.TEAM1, "lib"),
+//                    Tossup(4,1, 4, 1, TeamAnswered.TEAM1, "lib")
+//                )
+//                adapter.submitList(tossupList)
+            }
+            3 -> {
+                setContentView(R.layout.activity_game_lightning)
+                val adapterA = LightningAdapter(this::questionAnswered)
+                val adapterB = LightningAdapter(this::questionAnswered)
+                val recyclerViewA = findViewById<RecyclerView>(R.id.questionRecyclerA)
+                val recyclerViewB = findViewById<RecyclerView>(R.id.questionRecyclerB)
+                recyclerViewA.adapter = adapterA
+                recyclerViewB.adapter = adapterB
+                recyclerViewA.layoutManager = GridLayoutManager(this, 4, RecyclerView.HORIZONTAL, false)
+                recyclerViewB.layoutManager = GridLayoutManager(this, 4, RecyclerView.HORIZONTAL, false)
+
+                //replace lightningList with the actual list of questions from the
+                var lightningList = listOf<LightningQuestion>(
+                    LightningQuestion(1,1, LightningAnswer.CORRECT, ""),
+                    LightningQuestion(2,2, LightningAnswer.INCORRECT, ""),
+                    LightningQuestion(3,3, LightningAnswer.BOUNCED_BACK, ""),
+                    LightningQuestion(4,4, LightningAnswer.STALLED, "")
+                )
+                adapterA.submitList(lightningList)
+                adapterB.submitList(lightningList)
+            }
             else -> setContentView(R.layout.activity_game_quarter)
         }
 
@@ -36,6 +73,10 @@ class GameQuarterActivity : AppCompatActivity() {
     }
 
     private fun questionAnswered(tossup: Tossup){
+
+    }
+
+    private fun questionAnswered(lightningQuestion: LightningQuestion){
 
     }
 }

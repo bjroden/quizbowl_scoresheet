@@ -21,33 +21,33 @@
             android:text=""
             android:textSize="34sp" />
 
-        <RadioGroup
-            android:id="@+id/lightningRadioGroup"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation='horizontal'>
-
-            <RadioButton
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/lightningButtonGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true">
+            <Button
+                style="?attr/materialButtonOutlinedStyle"
                 android:id="@+id/CorrectButton"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="" />
-
-            <RadioButton
+                android:text="Yes"
+                />
+            <Button
+                style="?attr/materialButtonOutlinedStyle"
                 android:id="@+id/IncorrectButton"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="" />
-
-            <RadioButton
+                android:text="No"
+                />
+            <Button
+                style="?attr/materialButtonOutlinedStyle"
                 android:id="@+id/MissedButton"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="" />
-        </RadioGroup>
+                android:text="Bounced"
+                />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

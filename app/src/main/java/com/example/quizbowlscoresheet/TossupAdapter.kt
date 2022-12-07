@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizbowlscoresheet.database.models.TeamAnswered
 import com.example.quizbowlscoresheet.database.models.Tossup
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
 
 class TossupAdapter (
     private val questionAnswered:(tossup:Tossup)->Unit
@@ -28,10 +30,10 @@ class TossupAdapter (
 
     class TossupViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val tossupNumberView: TextView = itemView.findViewById(R.id.tossupNum)
-        private val radioGroup: RadioGroup = itemView.findViewById(R.id.tossupRadioGroup)
-        private val team1Button: RadioButton = itemView.findViewById(R.id.CorrectButton)
-        private val team2Button: RadioButton = itemView.findViewById(R.id.IncorrectButton)
-        private val missedButton: RadioButton = itemView.findViewById(R.id.MissedButton)
+        private val radioGroup: MaterialButtonToggleGroup = itemView.findViewById(R.id.tossupButtonGroup)
+        private val team1Button: MaterialButton = itemView.findViewById(R.id.Team1Button)
+        private val team2Button: MaterialButton = itemView.findViewById(R.id.Team2Button)
+        private val missedButton: MaterialButton = itemView.findViewById(R.id.MissedButton)
 
         fun bind(tossup: Tossup, questionAnswered:(tossup:Tossup)->Unit) {
             tossupNumberView.text = tossup.questionNumber.toString()

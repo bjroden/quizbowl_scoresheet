@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizbowlscoresheet.database.models.LightningAnswer
 import com.example.quizbowlscoresheet.database.models.LightningQuestion
+import com.google.android.material.button.MaterialButton
+import com.google.android.material.button.MaterialButtonToggleGroup
 
 class LightningAdapter (
     private val questionAnswered:(lightningQuestion: LightningQuestion)->Unit
@@ -28,10 +30,10 @@ class LightningAdapter (
 
     class LightningViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val lightningNumberView: TextView = itemView.findViewById(R.id.lightningNum)
-        private val radioGroup: RadioGroup = itemView.findViewById(R.id.lightningRadioGroup)
-        private val correctButton: RadioButton = itemView.findViewById(R.id.CorrectButton)
-        private val incorrectButton: RadioButton = itemView.findViewById(R.id.IncorrectButton)
-        private val missedButton: RadioButton = itemView.findViewById(R.id.MissedButton)
+        private val radioGroup: MaterialButtonToggleGroup = itemView.findViewById(R.id.lightningButtonGroup)
+        private val correctButton: MaterialButton = itemView.findViewById(R.id.CorrectButton)
+        private val incorrectButton: MaterialButton = itemView.findViewById(R.id.IncorrectButton)
+        private val missedButton: MaterialButton = itemView.findViewById(R.id.MissedButton)
 
         fun bind(lightningQuestion: LightningQuestion, questionAnswered:(lightningQuestion: LightningQuestion)->Unit) {
             lightningNumberView.text = lightningQuestion.questionNumber.toString()

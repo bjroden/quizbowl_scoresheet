@@ -39,6 +39,12 @@ class GameAGQBARepository(
 
     fun getGameAGQBAById(id: Long) = gameDao.getGameById(id)
 
+    fun getRoundNTossups(game: Game, roundNumber: Int) = tossupDao.getRoundNTossups(game.id!!, roundNumber)
+
+    fun getBonusCategoryByNumber(gameId: Long, categoryNumber: Int) = bonusDao.getBonusCategoryByNumber(gameId, categoryNumber)
+
+    fun getLightningCategoryByTeam(gameId: Long, team: TeamAnswered) = lightningDao.getLightningCategoryByTeam(gameId, team)
+
     suspend fun updateTossup(tossup: Tossup) = tossupDao.updateTossup(tossup)
 
     suspend fun updateBonusQuestion(bonusQuestion: BonusQuestion) = bonusDao.updateBonusQuestion(bonusQuestion)

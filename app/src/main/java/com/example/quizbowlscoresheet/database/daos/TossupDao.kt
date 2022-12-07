@@ -13,6 +13,9 @@ interface TossupDao {
     @Query("SELECT * FROM Tossup order by id ASC")
     fun getTossups(): Flow<List<Tossup>>
 
+    @Query("SELECT * FROM Tossup WHERE gameId = :gameId AND roundNumber = :round ORDER BY questionNumber ASC")
+    fun getRoundNTossups(gameId: Long, round: Int): Flow<List<Tossup>>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTossup(tossup: Tossup): Long
 

@@ -8,6 +8,7 @@ import com.example.quizbowlscoresheet.database.models.LightningAnswer
 import com.example.quizbowlscoresheet.database.models.LightningQuestion
 import com.example.quizbowlscoresheet.database.models.TeamAnswered
 import com.example.quizbowlscoresheet.database.models.Tossup
+import com.google.android.material.textfield.TextInputEditText
 
 class GameQuarterActivity : AppCompatActivity() {
 
@@ -31,9 +32,20 @@ class GameQuarterActivity : AppCompatActivity() {
                 val recyclerView = findViewById<RecyclerView>(R.id.questionRecycler)
                 recyclerView.adapter = adapter
                 recyclerView.layoutManager = GridLayoutManager(this, 4, RecyclerView.HORIZONTAL, false)
+                val team1ScoreView = findViewById<TextInputEditText>(R.id.tossupRoundScoreTeam1)
+                val team2ScoreView = findViewById<TextInputEditText>(R.id.tossupRoundScoreTeam2)
 
                 viewModel.currentGame.observe(this) { game ->
-                    adapter.submitList(game.roundNTossups(quarter))
+                    if (quarter == 1) {
+                        adapter.submitList(game.round1Tossups)
+                        team1ScoreView.setText(game.team1Round1Score.toString())
+                        team2ScoreView.setText(game.team2Round1Score.toString())
+                    }
+                    else {
+                        adapter.submitList(game.round4Tossups)
+                        team1ScoreView.setText(game.team1Round4Score.toString())
+                        team2ScoreView.setText(game.team2Round4Score.toString())
+                    }
                 }
             }
             2 -> {

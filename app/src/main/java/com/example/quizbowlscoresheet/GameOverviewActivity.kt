@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 
 class GameOverviewActivity : AppCompatActivity() {
 
@@ -27,6 +28,19 @@ class GameOverviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_overview)
+
+        val gameId = intent.getLongExtra(MainActivity.GAME_ID_TAG, -1)
+        if (gameId == -1L) {
+            TODO("Do better error checking for incorrect game id")
+        }
+
+        // TODO: initialize with factory when we can figure out what's causing the runtime errors on multiple constructor fields
+        // Words cannot express how much I hate JVM languages
+        val viewModel = GameOverviewViewModel((application as QuizbowlApplication).repository, gameId)
+        viewModel.currentGame.observe(this) {
+            // TODO: Populate fields here
+            Log.d("GameOverviewActivity", it.toString())
+        }
 
         var quarterIntent = Intent(this,GameQuarterActivity::class.java)
         quarter1Nav = findViewById(R.id.Quarter1Title)

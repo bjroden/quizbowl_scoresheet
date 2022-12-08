@@ -17,7 +17,7 @@ class GameAGQBARepository(
     val allGameAGQBA: Flow<List<GameAGQBA>> = gameDao.getGames()
 
     @WorkerThread
-    suspend fun newGameAGQBA() = database.withTransaction {
+    suspend fun newGameAGQBA(): Long = database.withTransaction {
         // TODO: have real team input
         val team1 = teamDao.insertTeam(Team(null, "team 1!"))
         val team2 = teamDao.insertTeam(Team(null, "team 2!"))
@@ -35,6 +35,7 @@ class GameAGQBARepository(
         val lightningIds = lightningDao.insertLightningCategoryInfoList(lightningRounds)
         val lightningQuestions = lightningIds.flatMap { blankLightningQuestions(it) }
         lightningDao.insertLightningQuestionList(lightningQuestions)
+        return@withTransaction gameId
     }
 
     fun getGameAGQBAById(id: Long) = gameDao.getGameById(id)

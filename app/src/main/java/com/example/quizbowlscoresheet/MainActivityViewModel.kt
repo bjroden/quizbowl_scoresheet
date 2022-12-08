@@ -8,10 +8,9 @@ import kotlinx.coroutines.launch
 
 class MainActivityViewModel(private val gameAGQBARepository: GameAGQBARepository): ViewModel() {
 
-    val allGameAGQBA = gameAGQBARepository.allGameAGQBA.asLiveData()
-
-    fun newGameAGQBA() = viewModelScope.launch {
-        gameAGQBARepository.newGameAGQBA()
+    fun newGameAGQBA(callback: (Long) -> Unit) = viewModelScope.launch {
+        val id = gameAGQBARepository.newGameAGQBA()
+        callback(id)
     }
 
     class TossupViewModelFactory(private val repository: GameAGQBARepository) : ViewModelProvider.Factory{

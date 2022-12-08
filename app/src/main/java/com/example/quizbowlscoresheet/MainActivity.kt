@@ -29,16 +29,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         newGameBtn = findViewById(R.id.new_game_btn)
         newGameBtn.setOnClickListener {
-            Log.d("MainActivity", "new game button was clicked")
-            startGameOverviewActivity.launch(Intent(this, GameOverviewActivity::class.java))
-        }
-
-        // TODO: replace this with something real
-        mainActivityViewModel.newGameAGQBA()
-        mainActivityViewModel.allGameAGQBA.observe(this) { games ->
-            for (game in games) {
-                Log.d("MainActivity", game.toString())
+            mainActivityViewModel.newGameAGQBA { gameId ->
+                val intent = Intent(this, GameOverviewActivity::class.java)
+                intent.putExtra(GAME_ID_TAG, gameId)
+                startGameOverviewActivity.launch(intent)
             }
         }
+    }
+
+    companion object {
+        const val GAME_ID_TAG = "GAME_ID"
     }
 }

@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     lateinit var newGameBtn: Button
+    lateinit var loadGameBtn: Button
 
     val startGameOverviewActivity =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
@@ -28,10 +29,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         newGameBtn = findViewById(R.id.new_game_btn)
+        loadGameBtn = findViewById(R.id.load_game_btn)
         newGameBtn.setOnClickListener {
             Log.d("MainActivity", "new game button was clicked")
             startGameOverviewActivity.launch(Intent(this, GameOverviewActivity::class.java))
         }
+        loadGameBtn.setOnClickListener {
+            Log.d("MainActivity", "load game button was clicked")
+            startGameOverviewActivity.launch(Intent(this, LoadGameActivity::class.java))
+        }
+        
 
         // TODO: replace this with something real
         mainActivityViewModel.newGameAGQBA()

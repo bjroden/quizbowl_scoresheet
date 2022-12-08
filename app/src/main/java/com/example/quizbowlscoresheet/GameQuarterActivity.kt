@@ -74,17 +74,15 @@ class GameQuarterActivity : AppCompatActivity() {
                 recyclerViewA.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
                 recyclerViewB.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
 
-                //replace lightningList with the actual list of questions from the
-                var lightningList = listOf<LightningQuestion>(
-                    LightningQuestion(1,1, LightningAnswer.CORRECT, ""),
-                    LightningQuestion(2,2, LightningAnswer.INCORRECT, ""),
-                    LightningQuestion(3,3, LightningAnswer.BOUNCED_BACK, ""),
-                    LightningQuestion(4,4, LightningAnswer.STALLED, ""),
-                    LightningQuestion(5,5, LightningAnswer.BOUNCED_BACK, ""),
-                    LightningQuestion(6,6, LightningAnswer.STALLED, "")
-                )
-                adapterA.submitList(lightningList)
-                adapterB.submitList(lightningList)
+                val team1ScoreView = findViewById<TextInputEditText>(R.id.lightningRoundScoreTeam1)
+                val team2ScoreView = findViewById<TextInputEditText>(R.id.lightningRoundScoreTeam2)
+
+                viewModel.currentGame.observe(this) { game ->
+                    team1ScoreView.setText(game.team1Round3Score.toString())
+                    team2ScoreView.setText(game.team2Round3Score.toString())
+                    game.team1LightningRound?.let { adapterA.submitList(it.questions) }
+                    game.team2LightningRound?.let { adapterB.submitList(it.questions) }
+                }
             }
         }
 

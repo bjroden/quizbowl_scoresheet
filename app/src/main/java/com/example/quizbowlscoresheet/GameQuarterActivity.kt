@@ -65,8 +65,8 @@ class GameQuarterActivity : AppCompatActivity() {
             }
             3 -> {
                 setContentView(R.layout.activity_game_lightning)
-                val adapterA = LightningAdapter(this::questionAnswered)
-                val adapterB = LightningAdapter(this::questionAnswered)
+                val adapterA = LightningAdapter(this::lightningQuestionAnswered)
+                val adapterB = LightningAdapter(this::lightningQuestionAnswered)
                 val recyclerViewA = findViewById<RecyclerView>(R.id.questionRecyclerA)
                 val recyclerViewB = findViewById<RecyclerView>(R.id.questionRecyclerB)
                 recyclerViewA.adapter = adapterA
@@ -92,6 +92,10 @@ class GameQuarterActivity : AppCompatActivity() {
 
     private fun questionAnswered(tossup: Tossup){
         viewModel.updateTossup(tossup)
+    }
+
+    private fun lightningQuestionAnswered(lightningQuestion: LightningQuestion) {
+        viewModel.updateLightningQuestion(lightningQuestion)
     }
 
     private fun questionAnswered(lightningQuestion: LightningQuestion){

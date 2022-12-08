@@ -33,18 +33,25 @@ class LightningAdapter (
         private val radioGroup: MaterialButtonToggleGroup = itemView.findViewById(R.id.lightningButtonGroup)
         private val correctButton: MaterialButton = itemView.findViewById(R.id.CorrectButton)
         private val incorrectButton: MaterialButton = itemView.findViewById(R.id.IncorrectButton)
-        private val missedButton: MaterialButton = itemView.findViewById(R.id.MissedButton)
+        private val bouncedBackButton: MaterialButton = itemView.findViewById(R.id.BouncedBackButton)
 
         fun bind(lightningQuestion: LightningQuestion, questionAnswered:(lightningQuestion: LightningQuestion)->Unit) {
             lightningNumberView.text = lightningQuestion.questionNumber.toString()
+            radioGroup.clearOnButtonCheckedListeners()
             when(lightningQuestion.answer){
                 LightningAnswer.CORRECT -> correctButton.isChecked = true
-                LightningAnswer.BOUNCED_BACK -> incorrectButton.isChecked = true
-                LightningAnswer.INCORRECT -> missedButton.isChecked = true
-                LightningAnswer.STALLED -> missedButton.isChecked = true
+                LightningAnswer.INCORRECT -> incorrectButton.isChecked = true
+                LightningAnswer.BOUNCED_BACK -> bouncedBackButton.isChecked = true
+                LightningAnswer.STALLED -> radioGroup.clearChecked()
             }
-            radioGroup.setOnClickListener{
-                questionAnswered(lightningQuestion)
+            radioGroup.addOnButtonCheckedListener { group, _, _ ->
+                val newTossup = when (group.checkedButtonId) {
+                    R.id.CorrectButton -> lightningQuestion.copy(answer = LightningAnswer.CORRECT)
+                    R.id.IncorrectButton -> lightningQuestion.copy(answer = LightningAnswer.INCORRECT)
+                    R.id.BouncedBackButton -> lightningQuestion.copy(answer = LightningAnswer.BOUNCED_BACK)
+                    else -> null
+                }
+                newTossup?.let { questionAnswered(it) }
             }
         }
 

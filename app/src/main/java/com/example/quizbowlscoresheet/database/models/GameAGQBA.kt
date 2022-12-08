@@ -55,7 +55,7 @@ data class GameAGQBA(
 
     @delegate:Ignore val team2Round1Score by lazy { round1Score(TeamAnswered.TEAM2) }
     @delegate:Ignore val team2Round2Score by lazy { round2Score(TeamAnswered.TEAM2) }
-    @delegate:Ignore val team2Round3Score by lazy { round3Score(TeamAnswered.TEAM1) }
+    @delegate:Ignore val team2Round3Score by lazy { round3Score(TeamAnswered.TEAM2) }
     @delegate:Ignore val team2Round4Score by lazy { round4Score(TeamAnswered.TEAM2) }
     @delegate:Ignore val team2TotalScore by lazy { team2Round1Score + team2Round2Score + team2Round3Score + team2Round4Score }
 

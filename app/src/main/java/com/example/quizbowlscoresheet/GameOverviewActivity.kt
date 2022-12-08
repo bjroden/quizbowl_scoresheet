@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import com.google.android.material.textfield.TextInputEditText
 
 class GameOverviewActivity : AppCompatActivity() {
 
@@ -29,6 +30,18 @@ class GameOverviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_overview)
 
+        val scoreQ1T1View = findViewById<TextInputEditText>(R.id.overviewScoreQ1T1)
+        val scoreQ2T1View = findViewById<TextInputEditText>(R.id.overviewScoreQ2T1)
+        val scoreQ3T1View = findViewById<TextInputEditText>(R.id.overviewScoreQ3T1)
+        val scoreQ4T1View = findViewById<TextInputEditText>(R.id.overviewScoreQ4T1)
+        val scoreTotalT1View = findViewById<TextInputEditText>(R.id.overviewScoreTotalT1)
+
+        val scoreQ1T2View = findViewById<TextInputEditText>(R.id.overviewScoreQ1T2)
+        val scoreQ2T2View = findViewById<TextInputEditText>(R.id.overviewScoreQ2T2)
+        val scoreQ3T2View = findViewById<TextInputEditText>(R.id.overviewScoreQ3T2)
+        val scoreQ4T2View = findViewById<TextInputEditText>(R.id.overviewScoreQ4T2)
+        val scoreTotalT2View = findViewById<TextInputEditText>(R.id.overviewScoreTotalT2)
+
         val gameId = intent.getLongExtra(StaticTags.GAME_ID_TAG, -1)
         if (gameId == -1L) {
             TODO("Do better error checking for incorrect game id")
@@ -37,9 +50,18 @@ class GameOverviewActivity : AppCompatActivity() {
         // TODO: initialize with factory when we can figure out what's causing the runtime errors on multiple constructor fields
         // Words cannot express how much I hate JVM languages
         val viewModel = GameOverviewViewModel((application as QuizbowlApplication).repository, gameId)
-        viewModel.currentGame.observe(this) {
-            // TODO: Populate fields here
-            Log.d("GameOverviewActivity", it.toString())
+        viewModel.currentGame.observe(this) { game ->
+            scoreQ1T1View.setText(game.team1Round1Score.toString())
+            scoreQ2T1View.setText(game.team1Round2Score.toString())
+            scoreQ3T1View.setText(game.team1Round3Score.toString())
+            scoreQ4T1View.setText(game.team1Round4Score.toString())
+            scoreTotalT1View.setText(game.team1TotalScore.toString())
+
+            scoreQ1T2View.setText(game.team2Round1Score.toString())
+            scoreQ2T2View.setText(game.team2Round2Score.toString())
+            scoreQ3T2View.setText(game.team2Round3Score.toString())
+            scoreQ4T2View.setText(game.team2Round4Score.toString())
+            scoreTotalT2View.setText(game.team2TotalScore.toString())
         }
 
         var quarterIntent = Intent(this,GameQuarterActivity::class.java)

@@ -51,11 +51,13 @@ data class GameAGQBA(
     @delegate:Ignore val team1Round2Score by lazy { round2Score(TeamAnswered.TEAM1) }
     @delegate:Ignore val team1Round3Score by lazy { round3Score(TeamAnswered.TEAM1) }
     @delegate:Ignore val team1Round4Score by lazy { round4Score(TeamAnswered.TEAM1) }
+    @delegate:Ignore val team1TotalScore by lazy { team1Round1Score + team1Round2Score + team1Round3Score + team1Round4Score }
 
     @delegate:Ignore val team2Round1Score by lazy { round1Score(TeamAnswered.TEAM2) }
     @delegate:Ignore val team2Round2Score by lazy { round2Score(TeamAnswered.TEAM2) }
     @delegate:Ignore val team2Round3Score by lazy { round3Score(TeamAnswered.TEAM1) }
     @delegate:Ignore val team2Round4Score by lazy { round4Score(TeamAnswered.TEAM2) }
+    @delegate:Ignore val team2TotalScore by lazy { team2Round1Score + team2Round2Score + team2Round3Score + team2Round4Score }
 
     fun roundNTossups(n: Int) = tossups.filter { it.roundNumber == n }
 

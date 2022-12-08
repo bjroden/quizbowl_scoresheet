@@ -2,6 +2,7 @@ package com.example.quizbowlscoresheet
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizbowlscoresheet.database.models.LightningAnswer
@@ -26,12 +27,15 @@ class GameQuarterActivity : AppCompatActivity() {
 
         val quarter = intent.getIntExtra("quarter", 0)
         when(quarter){
-            1,4 -> {
+            // TODO: gamer fix 2 and 5 pls
+            1,2,4 -> {
                 setContentView(R.layout.activity_game_tossup)
                 val adapter = TossupAdapter(this::questionAnswered)
                 val recyclerView = findViewById<RecyclerView>(R.id.questionRecycler)
+                val quarterTitle = findViewById<TextView>(R.id.quarterTitle)
+                quarterTitle.text = quarterTitle.text.toString() + quarter.toString()
                 recyclerView.adapter = adapter
-                recyclerView.layoutManager = GridLayoutManager(this, 4, RecyclerView.HORIZONTAL, false)
+                recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
                 val team1ScoreView = findViewById<TextInputEditText>(R.id.tossupRoundScoreTeam1)
                 val team2ScoreView = findViewById<TextInputEditText>(R.id.tossupRoundScoreTeam2)
 
@@ -41,6 +45,11 @@ class GameQuarterActivity : AppCompatActivity() {
                         team1ScoreView.setText(game.team1Round1Score.toString())
                         team2ScoreView.setText(game.team2Round1Score.toString())
                     }
+                    else if (quarter == 2) { // TODO: gamer fix 2 and 5 pls annihilate
+                        adapter.submitList(game.round2Tossups)
+                        team1ScoreView.setText(game.team1Round2Score.toString())
+                        team2ScoreView.setText(game.team2Round2Score.toString())
+                    }
                     else {
                         adapter.submitList(game.round4Tossups)
                         team1ScoreView.setText(game.team1Round4Score.toString())
@@ -49,7 +58,7 @@ class GameQuarterActivity : AppCompatActivity() {
                 }
                 recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
             }
-            2 -> {
+            5 -> {
                 setContentView(R.layout.activity_game_bonus)
 //                val adapter = BonusAdapter(this::questionAnswered)
 //                val recyclerView = findViewById<RecyclerView>(R.id.questionRecycler)

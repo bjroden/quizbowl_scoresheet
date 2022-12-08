@@ -3,10 +3,12 @@ package com.example.quizbowlscoresheet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizbowlscoresheet.database.models.Game
+import com.example.quizbowlscoresheet.database.models.TeamAnswered
 
 class GameAdapter (
     private val gameSelected:(game: Game)->Unit
@@ -23,8 +25,11 @@ class GameAdapter (
     }
 
     class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        var gameLayout: LinearLayout = itemView.findViewById(R.id.gameLayout)
         fun bind(game: Game, gameSelected: (game: Game) -> Unit) {
-
+            gameLayout.setOnClickListener {
+                gameSelected(game)
+            }
         }
 
         companion object {

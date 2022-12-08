@@ -47,6 +47,7 @@ class GameQuarterActivity : AppCompatActivity() {
                         team2ScoreView.setText(game.team2Round4Score.toString())
                     }
                 }
+                recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
             }
             2 -> {
                 setContentView(R.layout.activity_game_bonus)
@@ -70,20 +71,21 @@ class GameQuarterActivity : AppCompatActivity() {
                 val recyclerViewB = findViewById<RecyclerView>(R.id.questionRecyclerB)
                 recyclerViewA.adapter = adapterA
                 recyclerViewB.adapter = adapterB
-                recyclerViewA.layoutManager = GridLayoutManager(this, 4, RecyclerView.HORIZONTAL, false)
-                recyclerViewB.layoutManager = GridLayoutManager(this, 4, RecyclerView.HORIZONTAL, false)
+                recyclerViewA.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
+                recyclerViewB.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
 
                 //replace lightningList with the actual list of questions from the
                 var lightningList = listOf<LightningQuestion>(
                     LightningQuestion(1,1, LightningAnswer.CORRECT, ""),
                     LightningQuestion(2,2, LightningAnswer.INCORRECT, ""),
                     LightningQuestion(3,3, LightningAnswer.BOUNCED_BACK, ""),
-                    LightningQuestion(4,4, LightningAnswer.STALLED, "")
+                    LightningQuestion(4,4, LightningAnswer.STALLED, ""),
+                    LightningQuestion(5,5, LightningAnswer.BOUNCED_BACK, ""),
+                    LightningQuestion(6,6, LightningAnswer.STALLED, "")
                 )
                 adapterA.submitList(lightningList)
                 adapterB.submitList(lightningList)
             }
-            else -> setContentView(R.layout.activity_game_quarter)
         }
 
 

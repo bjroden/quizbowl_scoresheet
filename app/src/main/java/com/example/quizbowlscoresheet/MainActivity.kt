@@ -31,13 +31,9 @@ class MainActivity : AppCompatActivity() {
         newGameBtn.setOnClickListener {
             mainActivityViewModel.newGameAGQBA { gameId ->
                 val intent = Intent(this, GameOverviewActivity::class.java)
-                intent.putExtra(GAME_ID_TAG, gameId)
+                intent.putExtra(StaticTags.GAME_ID_TAG, gameId)
                 startGameOverviewActivity.launch(intent)
             }
         }
-    }
-
-    companion object {
-        const val GAME_ID_TAG = "GAME_ID"
     }
 }

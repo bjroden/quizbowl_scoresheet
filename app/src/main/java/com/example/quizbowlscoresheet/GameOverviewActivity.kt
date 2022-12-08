@@ -29,7 +29,7 @@ class GameOverviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_overview)
 
-        val gameId = intent.getLongExtra(MainActivity.GAME_ID_TAG, -1)
+        val gameId = intent.getLongExtra(StaticTags.GAME_ID_TAG, -1)
         if (gameId == -1L) {
             TODO("Do better error checking for incorrect game id")
         }
@@ -43,6 +43,8 @@ class GameOverviewActivity : AppCompatActivity() {
         }
 
         var quarterIntent = Intent(this,GameQuarterActivity::class.java)
+        quarterIntent.putExtra(StaticTags.GAME_ID_TAG, gameId)
+
         quarter1Nav = findViewById(R.id.Quarter1Title)
         quarter1Nav.setOnClickListener{
             quarterIntent.putExtra("quarter", 1)

@@ -10,8 +10,19 @@ import com.example.quizbowlscoresheet.database.models.TeamAnswered
 import com.example.quizbowlscoresheet.database.models.Tossup
 
 class GameQuarterActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: GameQuarterViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val gameId = intent.getLongExtra(StaticTags.GAME_ID_TAG, -1)
+        if (gameId == -1L) {
+            TODO("Do better error checking for incorrect game id")
+        }
+        // TODO: initialize with factory when we can figure out what's causing the runtime errors on multiple constructor fields
+        viewModel = GameQuarterViewModel((application as QuizbowlApplication).repository, gameId)
+
         val quarter = intent.getIntExtra("quarter", 0)
         when(quarter){
             1,4 -> {
@@ -21,14 +32,9 @@ class GameQuarterActivity : AppCompatActivity() {
                 recyclerView.adapter = adapter
                 recyclerView.layoutManager = GridLayoutManager(this, 4, RecyclerView.HORIZONTAL, false)
 
-                //replace tossupList with the actual list of questions
-                var tossupList = listOf<Tossup>(
-                    Tossup(1,1, 1, 1, TeamAnswered.TEAM1, "lib"),
-                    Tossup(2,1, 2, 1, TeamAnswered.TEAM1, "lib"),
-                    Tossup(3,1, 3, 1, TeamAnswered.TEAM1, "lib"),
-                    Tossup(4,1, 4, 1, TeamAnswered.TEAM1, "lib")
-                )
-                adapter.submitList(tossupList)
+                viewModel.currentGame.observe(this) { game ->
+                    adapter.submitList(game.roundNTossups(quarter))
+                }
             }
             2 -> {
                 setContentView(R.layout.activity_game_bonus)
@@ -73,7 +79,7 @@ class GameQuarterActivity : AppCompatActivity() {
     }
 
     private fun questionAnswered(tossup: Tossup){
-
+        viewModel.updateTossup(tossup)
     }
 
     private fun questionAnswered(lightningQuestion: LightningQuestion){

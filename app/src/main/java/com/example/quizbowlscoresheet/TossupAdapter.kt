@@ -37,13 +37,20 @@ class TossupAdapter (
 
         fun bind(tossup: Tossup, questionAnswered:(tossup:Tossup)->Unit) {
             tossupNumberView.text = tossup.questionNumber.toString()
+            radioGroup.clearOnButtonCheckedListeners()
             when(tossup.team){
                 TeamAnswered.TEAM1 -> team1Button.isChecked = true
                 TeamAnswered.TEAM2 -> team2Button.isChecked = true
                 TeamAnswered.NONE -> missedButton.isChecked = true
             }
-            radioGroup.setOnClickListener{
-                questionAnswered(tossup)
+            radioGroup.addOnButtonCheckedListener { group, _, _ ->
+                val newTossup = when (group.checkedButtonId) {
+                    R.id.Team1Button -> tossup.copy(team = TeamAnswered.TEAM1)
+                    R.id.Team2Button -> tossup.copy(team = TeamAnswered.TEAM2)
+                    R.id.MissedButton -> tossup.copy(team = TeamAnswered.NONE)
+                    else -> null
+                }
+                newTossup?.let { questionAnswered(it) }
             }
         }
 

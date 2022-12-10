@@ -14,6 +14,9 @@ interface LightningDao {
     @Query("SELECT * FROM LightningCategoryInfo WHERE gameId = :gameId AND team = :team")
     fun getLightningCategoryByTeam(gameId: Long, team: TeamAnswered): Flow<LightningCategory>
 
+    @Query("SELECT * FROM LightningCategoryInfo WHERE id = :id")
+    suspend fun getLightningCategoryInfoById(id: Long): LightningCategoryInfo
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLightningQuestion(question: LightningQuestion): Long
 

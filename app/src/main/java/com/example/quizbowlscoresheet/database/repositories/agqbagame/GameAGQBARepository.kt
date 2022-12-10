@@ -21,7 +21,7 @@ class GameAGQBARepository(
         // TODO: have real team input
         val team1 = teamDao.insertTeam(Team(null, "team 1!"))
         val team2 = teamDao.insertTeam(Team(null, "team 2!"))
-        val gameId = gameDao.insertGame(Game(null, team1, team2))
+        val gameId = gameDao.insertGame(Game(null, team1, team2, 0, 0))
         val tossups = blankAGQBATossups(gameId)
         tossupDao.insertTossupList(tossups)
         val bonusCategories = blankBonusCategories(gameId)
@@ -46,15 +46,45 @@ class GameAGQBARepository(
 
     fun getLightningCategoryByTeam(gameId: Long, team: TeamAnswered) = lightningDao.getLightningCategoryByTeam(gameId, team)
 
-    suspend fun updateTossup(tossup: Tossup) = tossupDao.updateTossup(tossup)
+    suspend fun updateTossup(tossup: Tossup) {
+        tossupDao.updateTossup(tossup)
+        val gameAGQBA = gameDao.getGameNoFlowById(tossup.gameId)
+        updateGameScores(gameAGQBA)
+    }
 
-    suspend fun updateBonusQuestion(bonusQuestion: BonusQuestion) = bonusDao.updateBonusQuestion(bonusQuestion)
+    suspend fun updateBonusQuestion(bonusQuestion: BonusQuestion) {
+        bonusDao.updateBonusQuestion(bonusQuestion)
+        val category = bonusDao.getBonusCategoryInfoById(bonusQuestion.categoryId)
+        val gameAGQBA = gameDao.getGameNoFlowById(category.gameId)
+        updateGameScores(gameAGQBA)
+    }
 
-    suspend fun updateBonusCategoryInfo(bonusCategoryInfo: BonusCategoryInfo) = bonusDao.updateBonusCategoryInfo(bonusCategoryInfo)
+    suspend fun updateBonusCategoryInfo(bonusCategoryInfo: BonusCategoryInfo) {
+        bonusDao.updateBonusCategoryInfo(bonusCategoryInfo)
+        val gameAGQBA = gameDao.getGameNoFlowById(bonusCategoryInfo.gameId)
+        updateGameScores(gameAGQBA)
+    }
 
-    suspend fun updateLightningQuestion(lightningQuestion: LightningQuestion) = lightningDao.updateLightningQuestion(lightningQuestion)
+    suspend fun updateLightningQuestion(lightningQuestion: LightningQuestion) {
+        lightningDao.updateLightningQuestion(lightningQuestion)
+        val category = lightningDao.getLightningCategoryInfoById(lightningQuestion.categoryId)
+        val gameAGQBA = gameDao.getGameNoFlowById(category.gameId)
+        updateGameScores(gameAGQBA)
+    }
 
-    suspend fun updateLightningCategoryInfo(lightningCategoryInfo: LightningCategoryInfo) = lightningDao.updateLightningCategoryInfo(lightningCategoryInfo)
+    suspend fun updateLightningCategoryInfo(lightningCategoryInfo: LightningCategoryInfo)  {
+        lightningDao.updateLightningCategoryInfo(lightningCategoryInfo)
+        val gameAGQBA = gameDao.getGameNoFlowById(lightningCategoryInfo.gameId)
+        updateGameScores(gameAGQBA)
+    }
+
+    suspend fun updateGameScores(gameAGQBA: GameAGQBA) {
+        val newTeam1Score = gameAGQBA.team1TotalScore
+        val newTeam2Score = gameAGQBA.team2TotalScore
+        val newGame = gameAGQBA.game.copy(team1SavedScore = newTeam1Score, team2SavedScore = newTeam2Score)
+        gameDao.updateGame(newGame)
+    }
+
 
     private fun blankBonusCategories(gameId: Long) = (1..4).map { categoryNumber ->
             BonusCategoryInfo(

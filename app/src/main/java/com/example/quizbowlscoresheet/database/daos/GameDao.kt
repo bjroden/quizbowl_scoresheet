@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import com.example.quizbowlscoresheet.database.models.Game
 import com.example.quizbowlscoresheet.database.models.GameAGQBA
 import kotlinx.coroutines.flow.Flow
@@ -18,6 +19,12 @@ interface GameDao {
     @Query("SELECT * FROM Game where :id = id")
     fun getGameById(id: Long): Flow<GameAGQBA>
 
+    @Query("SELECT * FROM Game where :id = id")
+    suspend fun getGameNoFlowById(id: Long): GameAGQBA
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGame(game: Game): Long
+
+    @Update
+    suspend fun updateGame(game: Game)
 }

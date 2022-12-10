@@ -27,5 +27,9 @@ data class Game (
 
     val team1Id: Long?,
 
-    val team2Id: Long?
+    val team2Id: Long?,
+
+    val team1SavedScore: Int,
+
+    val team2SavedScore: Int
 )

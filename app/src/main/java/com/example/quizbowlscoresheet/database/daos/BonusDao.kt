@@ -15,6 +15,9 @@ interface BonusDao {
     @Query("SELECT * FROM bonuscategoryinfo WHERE gameId = :gameId AND categoryNumber = :categoryNumber")
     fun getBonusCategoryByNumber(gameId: Long, categoryNumber: Int): Flow<BonusCategory>
 
+    @Query("SELECT * FROM bonuscategoryinfo WHERE id = :id")
+    suspend fun getBonusCategoryInfoById(id: Long): BonusCategoryInfo
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBonusQuestion(bonusQuestion: BonusQuestion): Long
 

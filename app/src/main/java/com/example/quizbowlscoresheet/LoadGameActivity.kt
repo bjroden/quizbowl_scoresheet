@@ -31,10 +31,10 @@ class LoadGameActivity : AppCompatActivity() {
 
         // TODO: gamer
         var gameList = listOf<Game>(
-            Game(1,1,2),
-            Game(2,1,2),
-            Game(3,1,2),
-            Game(4,1,2)
+            Game(1,1,2, 0, 0),
+            Game(2,1,2, 0, 0),
+            Game(3,1,2, 0, 0),
+            Game(4,1,2, 0, 0)
         )
         adapter.submitList(gameList)
     }

@@ -16,7 +16,7 @@ data class Tossup(
     @PrimaryKey(autoGenerate = true)
     val id: Long?,
 
-    val gameId: Long?,
+    val gameId: Long,
 
     val questionNumber: Int,
 

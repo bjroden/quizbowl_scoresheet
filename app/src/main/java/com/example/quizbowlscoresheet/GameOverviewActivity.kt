@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -42,6 +43,9 @@ class GameOverviewActivity : AppCompatActivity() {
         val scoreQ4T2View = findViewById<TextInputEditText>(R.id.overviewScoreQ4T2)
         val scoreTotalT2View = findViewById<TextInputEditText>(R.id.overviewScoreTotalT2)
 
+        val team1Name = findViewById<EditText>(R.id.TeamAName)
+        val team2Name = findViewById<EditText>(R.id.TeamBName)
+
         val gameId = intent.getLongExtra(StaticTags.GAME_ID_TAG, -1)
         if (gameId == -1L) {
             TODO("Do better error checking for incorrect game id")
@@ -62,6 +66,9 @@ class GameOverviewActivity : AppCompatActivity() {
             scoreQ3T2View.setText(game.team2Round3Score.toString())
             scoreQ4T2View.setText(game.team2Round4Score.toString())
             scoreTotalT2View.setText(game.team2TotalScore.toString())
+
+            team1Name.setText(game.team1?.name ?: "")
+            team2Name.setText(game.team2?.name ?: "")
         }
 
         var quarterIntent = Intent(this,GameQuarterActivity::class.java)

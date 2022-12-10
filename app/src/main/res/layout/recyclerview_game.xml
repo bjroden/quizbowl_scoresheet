@@ -54,6 +54,7 @@
             android:hint="Total Score">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/loadGameTeam1Score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none" />
@@ -69,6 +70,7 @@
             android:hint="Total Score">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/loadGameTeam2Score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none" />

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizbowlscoresheet.database.models.Game
@@ -29,14 +30,12 @@ class LoadGameActivity : AppCompatActivity() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
 
-        // TODO: gamer
-        var gameList = listOf<Game>(
-            Game(1,1,2, 0, 0),
-            Game(2,1,2, 0, 0),
-            Game(3,1,2, 0, 0),
-            Game(4,1,2, 0, 0)
-        )
-        adapter.submitList(gameList)
+        val viewModel: LoadGameViewModel by viewModels {
+            LoadGameViewModel.LoadGameViewModelFactory((application as QuizbowlApplication).repository)
+        }
+        viewModel.gameList.observe(this) { games ->
+            adapter.submitList(games)
+        }
     }
 
     private fun gameSelected(game: Game){

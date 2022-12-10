@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizbowlscoresheet.database.models.Game
 import com.example.quizbowlscoresheet.database.models.TeamAnswered
+import com.google.android.material.textfield.TextInputEditText
 
 class GameAdapter (
     private val gameSelected:(game: Game)->Unit
@@ -26,7 +27,12 @@ class GameAdapter (
 
     class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var gameLayout: LinearLayout = itemView.findViewById(R.id.gameLayout)
+        val team1Score: TextInputEditText = itemView.findViewById(R.id.loadGameTeam1Score)
+        val team2Score: TextInputEditText = itemView.findViewById(R.id.loadGameTeam2Score)
+
         fun bind(game: Game, gameSelected: (game: Game) -> Unit) {
+            team1Score.setText(game.team1SavedScore.toString())
+            team2Score.setText(game.team2SavedScore.toString())
             gameLayout.setOnClickListener {
                 gameSelected(game)
             }

@@ -13,14 +13,18 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface GameDao {
     @Transaction
-    @Query("SELECT * from Game")
-    fun getGames(): Flow<List<GameAGQBA>>
+    @Query("SELECT * FROM Game")
+    fun getGameAGQBAList(): Flow<List<GameAGQBA>>
+
+    @Transaction
+    @Query("SELECT * FROM Game")
+    fun getGameList(): Flow<List<Game>>
 
     @Query("SELECT * FROM Game where :id = id")
-    fun getGameById(id: Long): Flow<GameAGQBA>
+    fun getGameAGQBAFlowById(id: Long): Flow<GameAGQBA>
 
     @Query("SELECT * FROM Game where :id = id")
-    suspend fun getGameNoFlowById(id: Long): GameAGQBA
+    suspend fun getGameById(id: Long): GameAGQBA
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertGame(game: Game): Long

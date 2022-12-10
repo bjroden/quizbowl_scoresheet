@@ -14,8 +14,6 @@ class GameAGQBARepository(
     private val bonusDao = database.bonusDao()
     private val lightningDao = database.lightningDao()
 
-    val allGameAGQBA: Flow<List<GameAGQBA>> = gameDao.getGames()
-
     @WorkerThread
     suspend fun newGameAGQBA(): Long = database.withTransaction {
         // TODO: have real team input
@@ -38,7 +36,9 @@ class GameAGQBARepository(
         return@withTransaction gameId
     }
 
-    fun getGameAGQBAById(id: Long) = gameDao.getGameById(id)
+    fun getAllGamesFlow(): Flow<List<Game>> = gameDao.getGameList()
+
+    fun getGameAGQBAById(id: Long) = gameDao.getGameAGQBAFlowById(id)
 
     fun getRoundNTossups(game: Game, roundNumber: Int) = tossupDao.getRoundNTossups(game.id!!, roundNumber)
 
@@ -48,33 +48,33 @@ class GameAGQBARepository(
 
     suspend fun updateTossup(tossup: Tossup) {
         tossupDao.updateTossup(tossup)
-        val gameAGQBA = gameDao.getGameNoFlowById(tossup.gameId)
+        val gameAGQBA = gameDao.getGameById(tossup.gameId)
         updateGameScores(gameAGQBA)
     }
 
     suspend fun updateBonusQuestion(bonusQuestion: BonusQuestion) {
         bonusDao.updateBonusQuestion(bonusQuestion)
         val category = bonusDao.getBonusCategoryInfoById(bonusQuestion.categoryId)
-        val gameAGQBA = gameDao.getGameNoFlowById(category.gameId)
+        val gameAGQBA = gameDao.getGameById(category.gameId)
         updateGameScores(gameAGQBA)
     }
 
     suspend fun updateBonusCategoryInfo(bonusCategoryInfo: BonusCategoryInfo) {
         bonusDao.updateBonusCategoryInfo(bonusCategoryInfo)
-        val gameAGQBA = gameDao.getGameNoFlowById(bonusCategoryInfo.gameId)
+        val gameAGQBA = gameDao.getGameById(bonusCategoryInfo.gameId)
         updateGameScores(gameAGQBA)
     }
 
     suspend fun updateLightningQuestion(lightningQuestion: LightningQuestion) {
         lightningDao.updateLightningQuestion(lightningQuestion)
         val category = lightningDao.getLightningCategoryInfoById(lightningQuestion.categoryId)
-        val gameAGQBA = gameDao.getGameNoFlowById(category.gameId)
+        val gameAGQBA = gameDao.getGameById(category.gameId)
         updateGameScores(gameAGQBA)
     }
 
     suspend fun updateLightningCategoryInfo(lightningCategoryInfo: LightningCategoryInfo)  {
         lightningDao.updateLightningCategoryInfo(lightningCategoryInfo)
-        val gameAGQBA = gameDao.getGameNoFlowById(lightningCategoryInfo.gameId)
+        val gameAGQBA = gameDao.getGameById(lightningCategoryInfo.gameId)
         updateGameScores(gameAGQBA)
     }
 

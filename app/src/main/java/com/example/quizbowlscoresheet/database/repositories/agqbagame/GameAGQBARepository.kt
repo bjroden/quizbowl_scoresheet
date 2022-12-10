@@ -38,6 +38,8 @@ class GameAGQBARepository(
 
     fun getAllGamesFlow(): Flow<List<Game>> = gameDao.getGameList()
 
+    fun getGameWithTeamListFlow(): Flow<List<GameWithTeams>> = gameDao.getGameWithTeamList()
+
     fun getGameAGQBAById(id: Long) = gameDao.getGameAGQBAFlowById(id)
 
     fun getRoundNTossups(game: Game, roundNumber: Int) = tossupDao.getRoundNTossups(game.id!!, roundNumber)
@@ -84,7 +86,6 @@ class GameAGQBARepository(
         val newGame = gameAGQBA.game.copy(team1SavedScore = newTeam1Score, team2SavedScore = newTeam2Score)
         gameDao.updateGame(newGame)
     }
-
 
     private fun blankBonusCategories(gameId: Long) = (1..4).map { categoryNumber ->
             BonusCategoryInfo(

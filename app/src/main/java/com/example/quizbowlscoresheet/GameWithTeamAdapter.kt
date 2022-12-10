@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizbowlscoresheet.database.models.Game
-import com.example.quizbowlscoresheet.database.models.TeamAnswered
+import com.example.quizbowlscoresheet.database.models.GameWithTeams
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textview.MaterialTextView
 
-class GameAdapter (
+class GameWithTeamAdapter (
     private val gameSelected:(game: Game)->Unit
-) : ListAdapter<Game, GameAdapter.GameViewHolder>(GameComparator()) {
+) : ListAdapter<GameWithTeams, GameWithTeamAdapter.GameViewHolder>(GameWithTeamComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GameViewHolder {
         return GameViewHolder.create(parent)
@@ -22,19 +23,23 @@ class GameAdapter (
     override fun onBindViewHolder(holder: GameViewHolder, position: Int) {
         val current = getItem(position)
         holder.bind(current, gameSelected)
-        holder.itemView.tag = current.id
+        holder.itemView.tag = current.game.id
     }
 
     class GameViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var gameLayout: LinearLayout = itemView.findViewById(R.id.gameLayout)
         val team1Score: TextInputEditText = itemView.findViewById(R.id.loadGameTeam1Score)
         val team2Score: TextInputEditText = itemView.findViewById(R.id.loadGameTeam2Score)
+        val team1Name: MaterialTextView = itemView.findViewById(R.id.TeamAName)
+        val team2Name: MaterialTextView = itemView.findViewById(R.id.TeamBName)
 
-        fun bind(game: Game, gameSelected: (game: Game) -> Unit) {
-            team1Score.setText(game.team1SavedScore.toString())
-            team2Score.setText(game.team2SavedScore.toString())
+        fun bind(gameWithTeams: GameWithTeams, gameSelected: (game: Game) -> Unit) {
+            team1Score.setText(gameWithTeams.game.team1SavedScore.toString())
+            team2Score.setText(gameWithTeams.game.team2SavedScore.toString())
+            team1Name.setText(gameWithTeams.team1?.name ?: "Team 1 Not found")
+            team2Name.setText(gameWithTeams.team2?.name ?: "Team 2 Not found")
             gameLayout.setOnClickListener {
-                gameSelected(game)
+                gameSelected(gameWithTeams.game)
             }
         }
 
@@ -47,12 +52,12 @@ class GameAdapter (
         }
     }
 
-    class GameComparator : DiffUtil.ItemCallback<Game>() {
-        override fun areItemsTheSame(oldItem: Game, newItem: Game): Boolean {
-            return oldItem.id == newItem.id
+    class GameWithTeamComparator : DiffUtil.ItemCallback<GameWithTeams>() {
+        override fun areItemsTheSame(oldItem: GameWithTeams, newItem: GameWithTeams): Boolean {
+            return oldItem.game.id == newItem.game.id
         }
 
-        override fun areContentsTheSame(oldItem: Game, newItem: Game): Boolean {
+        override fun areContentsTheSame(oldItem: GameWithTeams, newItem: GameWithTeams): Boolean {
             return oldItem == newItem
         }
     }

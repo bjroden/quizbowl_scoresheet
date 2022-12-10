@@ -7,7 +7,7 @@ import com.example.quizbowlscoresheet.database.repositories.agqbagame.GameAGQBAR
 
 class LoadGameViewModel(private val gameAGQBARepository: GameAGQBARepository): ViewModel() {
 
-    val gameList = gameAGQBARepository.getAllGamesFlow().asLiveData()
+    val gameList = gameAGQBARepository.getGameWithTeamListFlow().asLiveData()
 
     class LoadGameViewModelFactory(private val repository: GameAGQBARepository) : ViewModelProvider.Factory{
         override fun <T: ViewModel> create(modelClass: Class<T>): T{

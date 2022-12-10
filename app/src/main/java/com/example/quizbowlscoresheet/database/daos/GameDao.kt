@@ -8,6 +8,7 @@ import androidx.room.Transaction
 import androidx.room.Update
 import com.example.quizbowlscoresheet.database.models.Game
 import com.example.quizbowlscoresheet.database.models.GameAGQBA
+import com.example.quizbowlscoresheet.database.models.GameWithTeams
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -19,6 +20,10 @@ interface GameDao {
     @Transaction
     @Query("SELECT * FROM Game")
     fun getGameList(): Flow<List<Game>>
+
+    @Transaction
+    @Query("SELECT * FROM Game")
+    fun getGameWithTeamList(): Flow<List<GameWithTeams>>
 
     @Query("SELECT * FROM Game where :id = id")
     fun getGameAGQBAFlowById(id: Long): Flow<GameAGQBA>

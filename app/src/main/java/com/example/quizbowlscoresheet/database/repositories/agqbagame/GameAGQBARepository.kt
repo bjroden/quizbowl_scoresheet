@@ -48,6 +48,10 @@ class GameAGQBARepository(
 
     fun getLightningCategoryByTeam(gameId: Long, team: TeamAnswered) = lightningDao.getLightningCategoryByTeam(gameId, team)
 
+    suspend fun updateTeam(team: Team) {
+        teamDao.updateTeam(team)
+    }
+
     suspend fun updateTossup(tossup: Tossup) {
         tossupDao.updateTossup(tossup)
         val gameAGQBA = gameDao.getGameById(tossup.gameId)

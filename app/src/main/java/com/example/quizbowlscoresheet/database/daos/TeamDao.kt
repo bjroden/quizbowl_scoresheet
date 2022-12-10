@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.quizbowlscoresheet.database.models.Team
 import kotlinx.coroutines.flow.Flow
 
@@ -17,4 +18,7 @@ interface TeamDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertTeamList(team: List<Team>): List<Long>
+
+    @Update
+    suspend fun updateTeam(team: Team)
 }

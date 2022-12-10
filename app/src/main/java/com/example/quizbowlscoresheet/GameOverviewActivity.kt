@@ -54,6 +54,12 @@ class GameOverviewActivity : AppCompatActivity() {
         // TODO: initialize with factory when we can figure out what's causing the runtime errors on multiple constructor fields
         // Words cannot express how much I hate JVM languages
         val viewModel = GameOverviewViewModel((application as QuizbowlApplication).repository, gameId)
+        team1Name.setOnFocusChangeListener { _, focused ->
+            if (!focused) { viewModel.changeTeam1Name(team1Name.text.toString()) }
+        }
+        team2Name.setOnFocusChangeListener { _, focused ->
+            if (!focused) { viewModel.changeTeam2Name(team2Name.text.toString()) }
+        }
         viewModel.currentGame.observe(this) { game ->
             scoreQ1T1View.setText(game.team1Round1Score.toString())
             scoreQ2T1View.setText(game.team1Round2Score.toString())

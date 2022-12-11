@@ -54,8 +54,7 @@ class GameAGQBARepository(
 
     suspend fun updateTossup(tossup: Tossup) {
         tossupDao.updateTossup(tossup)
-        val gameAGQBA = gameDao.getGameById(tossup.gameId)
-        updateGameScores(gameAGQBA)
+        updateGameScores(tossup.gameId)
     }
 
     suspend fun updateRound2Tossup(tossup: Tossup) = database.withTransaction {
@@ -70,37 +69,33 @@ class GameAGQBARepository(
         for ((newTeam, category) in teamsToCategories) {
             bonusDao.updateBonusCategoryInfo(category.copy(team = newTeam))
         }
-        val updatedGame = gameDao.getGameById(tossup.gameId)
-        updateGameScores(updatedGame)
+        updateGameScores(tossup.gameId)
     }
 
     suspend fun updateBonusQuestion(bonusQuestion: BonusQuestion) {
         bonusDao.updateBonusQuestion(bonusQuestion)
         val category = bonusDao.getBonusCategoryInfoById(bonusQuestion.categoryId)
-        val gameAGQBA = gameDao.getGameById(category.gameId)
-        updateGameScores(gameAGQBA)
+        updateGameScores(category.gameId)
     }
 
     suspend fun updateBonusCategoryInfo(bonusCategoryInfo: BonusCategoryInfo) {
         bonusDao.updateBonusCategoryInfo(bonusCategoryInfo)
-        val gameAGQBA = gameDao.getGameById(bonusCategoryInfo.gameId)
-        updateGameScores(gameAGQBA)
+        updateGameScores(bonusCategoryInfo.gameId)
     }
 
     suspend fun updateLightningQuestion(lightningQuestion: LightningQuestion) {
         lightningDao.updateLightningQuestion(lightningQuestion)
         val category = lightningDao.getLightningCategoryInfoById(lightningQuestion.categoryId)
-        val gameAGQBA = gameDao.getGameById(category.gameId)
-        updateGameScores(gameAGQBA)
+        updateGameScores(category.gameId)
     }
 
     suspend fun updateLightningCategoryInfo(lightningCategoryInfo: LightningCategoryInfo)  {
         lightningDao.updateLightningCategoryInfo(lightningCategoryInfo)
-        val gameAGQBA = gameDao.getGameById(lightningCategoryInfo.gameId)
-        updateGameScores(gameAGQBA)
+        updateGameScores(lightningCategoryInfo.gameId)
     }
 
-    suspend fun updateGameScores(gameAGQBA: GameAGQBA) {
+    suspend fun updateGameScores(gameId: Long) {
+        val gameAGQBA = gameDao.getGameById(gameId)
         val newTeam1Score = gameAGQBA.team1TotalScore
         val newTeam2Score = gameAGQBA.team2TotalScore
         val newGame = gameAGQBA.game.copy(team1SavedScore = newTeam1Score, team2SavedScore = newTeam2Score)

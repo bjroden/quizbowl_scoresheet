@@ -103,6 +103,10 @@ class GameQuarterActivity : AppCompatActivity() {
         viewModel.updateTossup(tossup)
     }
 
+    private fun round2TossupAnswered(tossup: Tossup) {
+        viewModel.updateTossup(tossup)
+    }
+
     private fun lightningQuestionAnswered(lightningQuestion: LightningQuestion) {
         viewModel.updateLightningQuestion(lightningQuestion)
     }

@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.quizbowlscoresheet.database.models.BonusQuestion
 import com.example.quizbowlscoresheet.database.models.LightningQuestion
 import com.example.quizbowlscoresheet.database.models.Tossup
 import com.example.quizbowlscoresheet.database.repositories.agqbagame.GameAGQBARepository
@@ -15,6 +16,14 @@ class GameQuarterViewModel(private val repository: GameAGQBARepository, private 
 
     fun updateTossup(tossup: Tossup) = viewModelScope.launch {
         repository.updateTossup(tossup)
+    }
+
+    fun updateRound2Tossup(tossup: Tossup) = viewModelScope.launch {
+        repository.updateRound2Tossup(tossup)
+    }
+
+    fun updateBonusQuestion(bonusQuestion: BonusQuestion) = viewModelScope.launch {
+        repository.updateBonusQuestion(bonusQuestion)
     }
 
     fun updateLightningQuestion(lightningQuestion: LightningQuestion) = viewModelScope.launch {

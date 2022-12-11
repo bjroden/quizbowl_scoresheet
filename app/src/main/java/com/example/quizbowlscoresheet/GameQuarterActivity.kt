@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.quizbowlscoresheet.database.models.LightningAnswer
-import com.example.quizbowlscoresheet.database.models.LightningQuestion
-import com.example.quizbowlscoresheet.database.models.TeamAnswered
-import com.example.quizbowlscoresheet.database.models.Tossup
+import com.example.quizbowlscoresheet.database.models.*
 import com.google.android.material.textfield.TextInputEditText
 
 class GameQuarterActivity : AppCompatActivity() {
@@ -28,7 +25,7 @@ class GameQuarterActivity : AppCompatActivity() {
         val quarter = intent.getIntExtra("quarter", 0)
         when(quarter){
             // TODO: gamer fix 2 and 5 pls
-            1,2,4 -> {
+            1,4 -> {
                 setContentView(R.layout.activity_game_tossup)
                 val adapter = TossupAdapter(this::questionAnswered)
                 val recyclerView = findViewById<RecyclerView>(R.id.questionRecycler)
@@ -45,32 +42,35 @@ class GameQuarterActivity : AppCompatActivity() {
                         team1ScoreView.setText(game.team1Round1Score.toString())
                         team2ScoreView.setText(game.team2Round1Score.toString())
                     }
-                    else if (quarter == 2) { // TODO: gamer fix 2 and 5 pls annihilate
-                        adapter.submitList(game.round2Tossups)
-                        team1ScoreView.setText(game.team1Round2Score.toString())
-                        team2ScoreView.setText(game.team2Round2Score.toString())
-                    }
                     else {
                         adapter.submitList(game.round4Tossups)
                         team1ScoreView.setText(game.team1Round4Score.toString())
                         team2ScoreView.setText(game.team2Round4Score.toString())
                     }
                 }
-                recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
+//                recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
             }
-            5 -> {
+            2 -> {
                 setContentView(R.layout.activity_game_bonus)
-//                val adapter = BonusAdapter(this::questionAnswered)
-//                val recyclerView = findViewById<RecyclerView>(R.id.questionRecycler)
-//                recyclerView.adapter = adapter
-//                recyclerView.layoutManager = GridLayoutManager(this, 4, RecyclerView.HORIZONTAL, false)
-//                var tossupList = listOf<Tossup>(
-//                    Tossup(1,1, 1, 1, TeamAnswered.TEAM1, "lib"),
-//                    Tossup(2,1, 2, 1, TeamAnswered.TEAM1, "lib"),
-//                    Tossup(3,1, 3, 1, TeamAnswered.TEAM1, "lib"),
-//                    Tossup(4,1, 4, 1, TeamAnswered.TEAM1, "lib")
-//                )
-//                adapter.submitList(tossupList)
+                val adapter = TossupAdapter(this::questionAnswered)
+                val recyclerView = findViewById<RecyclerView>(R.id.questionRecycler)
+                recyclerView.adapter = adapter
+                val team1ScoreView = findViewById<TextInputEditText>(R.id.bonusRoundScoreTeam1)
+                val team2ScoreView = findViewById<TextInputEditText>(R.id.bonusRoundScoreTeam2)
+                recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
+
+                val bonusAdapter = BonusAdapter(this::bonusAnswered)
+                val bonusRecyclerView = findViewById<RecyclerView>(R.id.bonusRecycler)
+                bonusRecyclerView.adapter = bonusAdapter
+                bonusRecyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
+
+                viewModel.currentGame.observe(this) { game ->
+                    adapter.submitList(game.round2Tossups)
+                    bonusAdapter.submitList(game.bonusCategories)
+                    team1ScoreView.setText(game.team1Round2Score.toString())
+                    team2ScoreView.setText(game.team2Round2Score.toString())
+                }
+
             }
             3 -> {
                 setContentView(R.layout.activity_game_lightning)
@@ -111,7 +111,8 @@ class GameQuarterActivity : AppCompatActivity() {
         viewModel.updateLightningQuestion(lightningQuestion)
     }
 
-    private fun questionAnswered(lightningQuestion: LightningQuestion){
 
+    private fun bonusAnswered(bonusCategory: BonusCategory){
+        //TODO: MOM
     }
 }

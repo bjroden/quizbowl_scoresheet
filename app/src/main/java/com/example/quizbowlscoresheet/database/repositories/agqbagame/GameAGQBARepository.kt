@@ -61,9 +61,11 @@ class GameAGQBARepository(
     suspend fun updateRound2Tossup(tossup: Tossup) = database.withTransaction {
         tossupDao.updateTossup(tossup)
         val gameAGQBA = gameDao.getGameById(tossup.gameId)
-        val teamOrder = gameAGQBA.round2Tossups
+        val answeredTossupTeams = gameAGQBA.round2Tossups
             .filter { it.team != TeamAnswered.NONE }
             .map { it.team }
+        val defaults = List(gameAGQBA.bonusCategories.size - answeredTossupTeams.size) { TeamAnswered.NONE }
+        val teamOrder = answeredTossupTeams.plus(defaults)
         val teamsToCategories = teamOrder.zip(gameAGQBA.bonusCategories.map { it.categoryInfo })
         for ((newTeam, category) in teamsToCategories) {
             bonusDao.updateBonusCategoryInfo(category.copy(team = newTeam))

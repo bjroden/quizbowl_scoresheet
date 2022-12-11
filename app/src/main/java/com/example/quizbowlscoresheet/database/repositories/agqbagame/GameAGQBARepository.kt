@@ -64,7 +64,7 @@ class GameAGQBARepository(
         val answeredTossupTeams = gameAGQBA.round2Tossups
             .filter { it.team != TeamAnswered.NONE }
             .map { it.team }
-        val defaults = List(gameAGQBA.bonusCategories.size - answeredTossupTeams.size) { TeamAnswered.NONE }
+        val defaults = (answeredTossupTeams.size until gameAGQBA.bonusCategories.size).map { TeamAnswered.NONE }
         val teamOrder = answeredTossupTeams.plus(defaults)
         val teamsToCategories = teamOrder.zip(gameAGQBA.bonusCategories.map { it.categoryInfo })
         for ((newTeam, category) in teamsToCategories) {

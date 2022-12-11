@@ -52,14 +52,14 @@ class GameQuarterActivity : AppCompatActivity() {
             }
             2 -> {
                 setContentView(R.layout.activity_game_bonus)
-                val adapter = TossupAdapter(this::questionAnswered)
+                val adapter = TossupAdapter(this::round2TossupAnswered)
                 val recyclerView = findViewById<RecyclerView>(R.id.questionRecycler)
                 recyclerView.adapter = adapter
                 val team1ScoreView = findViewById<TextInputEditText>(R.id.bonusRoundScoreTeam1)
                 val team2ScoreView = findViewById<TextInputEditText>(R.id.bonusRoundScoreTeam2)
                 recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
 
-                val bonusAdapter = BonusAdapter(this::bonusAnswered)
+                val bonusAdapter = BonusAdapter(this::bonusQuestionAnswered)
                 val bonusRecyclerView = findViewById<RecyclerView>(R.id.bonusRecycler)
                 bonusRecyclerView.adapter = bonusAdapter
                 bonusRecyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
@@ -104,15 +104,14 @@ class GameQuarterActivity : AppCompatActivity() {
     }
 
     private fun round2TossupAnswered(tossup: Tossup) {
-        viewModel.updateTossup(tossup)
+        viewModel.updateRound2Tossup(tossup)
     }
 
     private fun lightningQuestionAnswered(lightningQuestion: LightningQuestion) {
         viewModel.updateLightningQuestion(lightningQuestion)
     }
 
-
-    private fun bonusAnswered(bonusCategory: BonusCategory){
-        //TODO: MOM
+    private fun bonusQuestionAnswered(bonusQuestion: BonusQuestion){
+        viewModel.updateBonusQuestion(bonusQuestion)
     }
 }

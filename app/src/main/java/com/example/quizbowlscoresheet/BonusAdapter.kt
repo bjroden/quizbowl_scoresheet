@@ -8,11 +8,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizbowlscoresheet.database.models.BonusCategory
+import com.example.quizbowlscoresheet.database.models.BonusQuestion
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.button.MaterialButtonToggleGroup
 
 class BonusAdapter(
-    private val bonusAnswered:(bonusCategory:BonusCategory)->Unit
+    private val bonusAnswered: (bonusQuestion: BonusQuestion) -> Unit
 ) : ListAdapter<BonusCategory, BonusAdapter.BonusViewHolder>(BonusAdapter.BonusComparator()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BonusViewHolder {
         return BonusViewHolder.create(parent)
@@ -32,7 +33,7 @@ class BonusAdapter(
         private val bonus4: MaterialButton = itemView.findViewById(R.id.bonus4)
         private val bonusCategoryNum: TextView = itemView.findViewById(R.id.bonusCategoryNum)
 
-        fun bind(bonusCategory: BonusCategory, bonusAnswered:(bonusCategory:BonusCategory)->Unit) {
+        fun bind(bonusCategory: BonusCategory, bonusAnswered:(bonusQuestion: BonusQuestion)->Unit) {
             bonusCategoryNum.text = bonusCategory.categoryInfo.categoryNumber.toString()
             bonusButtonGroup.clearOnButtonCheckedListeners()
             for(question in bonusCategory.bonusQuestions) {
@@ -51,7 +52,7 @@ class BonusAdapter(
                     R.id.bonus4 -> bonusCategory.bonusQuestions[3].copy(answered = isChecked)
                     else -> null
                 }
-                newBonus?.let { bonusAnswered(bonusCategory) }
+                newBonus?.let { bonusAnswered(it) }
             }
 
 

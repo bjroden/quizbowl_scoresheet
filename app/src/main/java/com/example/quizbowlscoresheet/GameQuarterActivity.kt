@@ -27,7 +27,6 @@ class GameQuarterActivity : AppCompatActivity() {
 
         val quarter = intent.getIntExtra("quarter", 0)
         when(quarter){
-            // TODO: gamer fix 2 and 5 pls
             1,4 -> {
                 setContentView(R.layout.activity_game_tossup)
                 val adapter = TossupAdapter(this::questionAnswered)
@@ -56,7 +55,6 @@ class GameQuarterActivity : AppCompatActivity() {
                         team2ScoreView.setText(game.team2Round4Score.toString())
                     }
                 }
-//                recyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
             }
             2 -> {
                 setContentView(R.layout.activity_game_bonus)

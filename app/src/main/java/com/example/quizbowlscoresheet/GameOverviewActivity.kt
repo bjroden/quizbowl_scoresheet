@@ -5,7 +5,6 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
@@ -19,6 +18,8 @@ class GameOverviewActivity : AppCompatActivity() {
     lateinit var quarter2Nav: TextView
     lateinit var quarter3Nav: TextView
     lateinit var quarter4Nav: TextView
+    lateinit var team1NameView: EditText
+    lateinit var team2NameView: EditText
 
     val startGameQuarterActivity = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             result: ActivityResult ->
@@ -43,8 +44,8 @@ class GameOverviewActivity : AppCompatActivity() {
         val scoreQ4T2View = findViewById<TextInputEditText>(R.id.overviewScoreQ4T2)
         val scoreTotalT2View = findViewById<TextInputEditText>(R.id.overviewScoreTotalT2)
 
-        val team1Name = findViewById<EditText>(R.id.TeamAName)
-        val team2Name = findViewById<EditText>(R.id.TeamBName)
+        team1NameView = findViewById(R.id.TeamAName)
+        team2NameView = findViewById(R.id.TeamBName)
 
         val gameId = intent.getLongExtra(StaticTags.GAME_ID_TAG, -1)
         if (gameId == -1L) {
@@ -54,11 +55,11 @@ class GameOverviewActivity : AppCompatActivity() {
             GameOverviewViewModel.GameOverviewViewModelFactory((application as QuizbowlApplication).repository, gameId)
         }
 
-        team1Name.setOnFocusChangeListener { _, focused ->
-            if (!focused) { viewModel.changeTeam1Name(team1Name.text.toString()) }
+        team1NameView.setOnFocusChangeListener { _, focused ->
+            if (!focused) { viewModel.changeTeam1Name(team1NameView.text.toString()) }
         }
-        team2Name.setOnFocusChangeListener { _, focused ->
-            if (!focused) { viewModel.changeTeam2Name(team2Name.text.toString()) }
+        team2NameView.setOnFocusChangeListener { _, focused ->
+            if (!focused) { viewModel.changeTeam2Name(team2NameView.text.toString()) }
         }
         viewModel.currentGame.observe(this) { game ->
             scoreQ1T1View.setText(game.team1Round1Score.toString())
@@ -73,8 +74,8 @@ class GameOverviewActivity : AppCompatActivity() {
             scoreQ4T2View.setText(game.team2Round4Score.toString())
             scoreTotalT2View.setText(game.team2TotalScore.toString())
 
-            team1Name.setText(game.team1?.name ?: "")
-            team2Name.setText(game.team2?.name ?: "")
+            team1NameView.setText(game.team1?.name ?: "")
+            team2NameView.setText(game.team2?.name ?: "")
         }
 
         var quarterIntent = Intent(this,GameQuarterActivity::class.java)
@@ -103,5 +104,11 @@ class GameOverviewActivity : AppCompatActivity() {
             quarterIntent.putExtra("quarter", 4)
             startGameQuarterActivity.launch(quarterIntent)
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        team1NameView.clearFocus()
+        team2NameView.clearFocus()
     }
 }

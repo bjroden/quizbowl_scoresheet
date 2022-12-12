@@ -39,7 +39,12 @@ class GameQuarterActivity : AppCompatActivity() {
                 val team1ScoreView = findViewById<TextInputEditText>(R.id.tossupRoundScoreTeam1)
                 val team2ScoreView = findViewById<TextInputEditText>(R.id.tossupRoundScoreTeam2)
 
+                val team1NameView = findViewById<TextView>(R.id.TeamAName)
+                val team2NameView = findViewById<TextView>(R.id.TeamBName)
+
                 viewModel.currentGame.observe(this) { game ->
+                    team1NameView.text = game.team1?.name ?: "Team 1 not found"
+                    team2NameView.text = game.team2?.name ?: "Team 2 not found"
                     if (quarter == 1) {
                         adapter.submitList(game.round1Tossups)
                         team1ScoreView.setText(game.team1Round1Score.toString())
@@ -67,11 +72,16 @@ class GameQuarterActivity : AppCompatActivity() {
                 bonusRecyclerView.adapter = bonusAdapter
                 bonusRecyclerView.layoutManager = GridLayoutManager(this, 1, RecyclerView.VERTICAL, false)
 
+                val team1NameView = findViewById<TextView>(R.id.TeamAName)
+                val team2NameView = findViewById<TextView>(R.id.TeamBName)
+
                 viewModel.currentGame.observe(this) { game ->
                     adapter.submitList(game.round2Tossups)
                     bonusAdapter.submitList(game.bonusCategories)
                     team1ScoreView.setText(game.team1Round2Score.toString())
                     team2ScoreView.setText(game.team2Round2Score.toString())
+                    team1NameView.text = game.team1?.name ?: "Team 1 not found"
+                    team2NameView.text = game.team2?.name ?: "Team 2 not found"
                 }
 
             }
@@ -89,16 +99,19 @@ class GameQuarterActivity : AppCompatActivity() {
                 val team1ScoreView = findViewById<TextInputEditText>(R.id.lightningRoundScoreTeam1)
                 val team2ScoreView = findViewById<TextInputEditText>(R.id.lightningRoundScoreTeam2)
 
+                val team1NameView = findViewById<TextView>(R.id.TeamAName)
+                val team2NameView = findViewById<TextView>(R.id.TeamBName)
+
                 viewModel.currentGame.observe(this) { game ->
                     team1ScoreView.setText(game.team1Round3Score.toString())
                     team2ScoreView.setText(game.team2Round3Score.toString())
+                    team1NameView.text = game.team1?.name ?: "Team 1 not found"
+                    team2NameView.text = game.team2?.name ?: "Team 2 not found"
                     game.team1LightningRound?.let { adapterA.submitList(it.questions) }
                     game.team2LightningRound?.let { adapterB.submitList(it.questions) }
                 }
             }
         }
-
-
 
     }
 

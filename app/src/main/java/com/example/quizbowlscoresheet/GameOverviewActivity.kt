@@ -50,10 +50,10 @@ class GameOverviewActivity : AppCompatActivity() {
         if (gameId == -1L) {
             TODO("Do better error checking for incorrect game id")
         }
+        val viewModel: GameOverviewViewModel by viewModels {
+            GameOverviewViewModel.GameOverviewViewModelFactory((application as QuizbowlApplication).repository, gameId)
+        }
 
-        // TODO: initialize with factory when we can figure out what's causing the runtime errors on multiple constructor fields
-        // Words cannot express how much I hate JVM languages
-        val viewModel = GameOverviewViewModel((application as QuizbowlApplication).repository, gameId)
         team1Name.setOnFocusChangeListener { _, focused ->
             if (!focused) { viewModel.changeTeam1Name(team1Name.text.toString()) }
         }

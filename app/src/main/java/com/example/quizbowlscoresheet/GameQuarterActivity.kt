@@ -3,6 +3,7 @@ package com.example.quizbowlscoresheet
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizbowlscoresheet.database.models.*
@@ -19,8 +20,10 @@ class GameQuarterActivity : AppCompatActivity() {
         if (gameId == -1L) {
             TODO("Do better error checking for incorrect game id")
         }
-        // TODO: initialize with factory when we can figure out what's causing the runtime errors on multiple constructor fields
-        viewModel = GameQuarterViewModel((application as QuizbowlApplication).repository, gameId)
+
+        viewModel = ViewModelProvider(this,
+            GameQuarterViewModel.GameQuarterViewModelFactory((application as QuizbowlApplication).repository, gameId))
+            .get(GameQuarterViewModel::class.java)
 
         val quarter = intent.getIntExtra("quarter", 0)
         when(quarter){

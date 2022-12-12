@@ -32,7 +32,7 @@ class GameQuarterViewModel(private val repository: GameAGQBARepository, private 
 
     class GameQuarterViewModelFactory(private val repository: GameAGQBARepository, private val gameId: Long) : ViewModelProvider.Factory{
         override fun <T: ViewModel> create(modelClass: Class<T>): T{
-            if(modelClass.isAssignableFrom(GameOverviewViewModel.GameOverviewViewModelFactory::class.java)){
+            if(modelClass.isAssignableFrom(GameQuarterViewModel::class.java)){
                 @Suppress("UNCHECKED_CAST")
                 return GameQuarterViewModel(repository, gameId) as T
             }

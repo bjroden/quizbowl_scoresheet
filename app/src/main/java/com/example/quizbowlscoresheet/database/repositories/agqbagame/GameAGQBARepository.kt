@@ -16,9 +16,8 @@ class GameAGQBARepository(
 
     @WorkerThread
     suspend fun newGameAGQBA(): Long = database.withTransaction {
-        // TODO: have real team input
-        val team1 = teamDao.insertTeam(Team(null, "team 1!"))
-        val team2 = teamDao.insertTeam(Team(null, "team 2!"))
+        val team1 = teamDao.insertTeam(Team(null, "Team 1"))
+        val team2 = teamDao.insertTeam(Team(null, "Team 2"))
         val gameId = gameDao.insertGame(Game(null, team1, team2, 0, 0))
         val tossups = blankAGQBATossups(gameId)
         tossupDao.insertTossupList(tossups)

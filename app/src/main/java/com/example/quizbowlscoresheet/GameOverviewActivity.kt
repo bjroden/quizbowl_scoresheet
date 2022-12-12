@@ -108,7 +108,7 @@ class GameOverviewActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        viewModel.changeTeam1Name(team1NameView.text.toString())
-        viewModel.changeTeam2Name(team2NameView.text.toString())
+        team1NameView.clearFocus()
+        team2NameView.clearFocus()
     }
 }

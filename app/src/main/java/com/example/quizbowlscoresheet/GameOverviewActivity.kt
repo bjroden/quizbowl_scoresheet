@@ -78,32 +78,24 @@ class GameOverviewActivity : AppCompatActivity() {
             team2NameView.setText(game.team2?.name ?: "")
         }
 
-        var quarterIntent = Intent(this,GameQuarterActivity::class.java)
-        quarterIntent.putExtra(StaticTags.GAME_ID_TAG, gameId)
-
         quarter1Nav = findViewById(R.id.Quarter1Title)
-        quarter1Nav.setOnClickListener{
-            quarterIntent.putExtra("quarter", 1)
-            startGameQuarterActivity.launch(quarterIntent)
-        }
+        quarter1Nav.setOnClickListener { launchGameQuarter(1, gameId) }
 
         quarter2Nav = findViewById(R.id.Quarter2Title)
-        quarter2Nav.setOnClickListener{
-            quarterIntent.putExtra("quarter", 2)
-            startGameQuarterActivity.launch(quarterIntent)
-        }
+        quarter2Nav.setOnClickListener { launchGameQuarter(2, gameId) }
 
         quarter3Nav = findViewById(R.id.Quarter3Title)
-        quarter3Nav.setOnClickListener{
-            quarterIntent.putExtra("quarter", 3)
-            startGameQuarterActivity.launch(quarterIntent)
-        }
+        quarter3Nav.setOnClickListener { launchGameQuarter(3, gameId) }
 
         quarter4Nav = findViewById(R.id.Quarter4Title)
-        quarter4Nav.setOnClickListener{
-            quarterIntent.putExtra("quarter", 4)
-            startGameQuarterActivity.launch(quarterIntent)
-        }
+        quarter4Nav.setOnClickListener { launchGameQuarter(4, gameId) }
+    }
+
+    private fun launchGameQuarter(quarter: Int, gameId: Long) {
+        val quarterIntent = Intent(this,GameQuarterActivity::class.java)
+        quarterIntent.putExtra(StaticTags.GAME_ID_TAG, gameId)
+        quarterIntent.putExtra(StaticTags.GAME_QUARTER, quarter)
+        startGameQuarterActivity.launch(quarterIntent)
     }
 
     override fun onStop() {

@@ -25,7 +25,7 @@ class GameQuarterActivity : AppCompatActivity() {
             GameQuarterViewModel.GameQuarterViewModelFactory((application as QuizbowlApplication).repository, gameId))
             .get(GameQuarterViewModel::class.java)
 
-        val quarter = intent.getIntExtra("quarter", 0)
+        val quarter = intent.getIntExtra(StaticTags.GAME_QUARTER, 0)
         when(quarter){
             1,4 -> {
                 setContentView(R.layout.activity_game_tossup)

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -82,21 +83,25 @@ class GameOverviewActivity : AppCompatActivity() {
         quarter1Nav.setOnClickListener { launchGameQuarter(1, gameId) }
         scoreQ1T1View.setOnClickListener { launchGameQuarter(1, gameId) }
         scoreQ1T2View.setOnClickListener { launchGameQuarter(1, gameId) }
+        findViewById<LinearLayout>(R.id.Q1ScoreContainer).setOnClickListener { launchGameQuarter(1, gameId) }
 
         quarter2Nav = findViewById(R.id.Quarter2Title)
         quarter2Nav.setOnClickListener { launchGameQuarter(2, gameId) }
         scoreQ2T1View.setOnClickListener { launchGameQuarter(2, gameId) }
         scoreQ2T2View.setOnClickListener { launchGameQuarter(2, gameId) }
+        findViewById<LinearLayout>(R.id.Q2ScoreContainer).setOnClickListener { launchGameQuarter(2, gameId) }
 
         quarter3Nav = findViewById(R.id.Quarter3Title)
         quarter3Nav.setOnClickListener { launchGameQuarter(3, gameId) }
         scoreQ3T1View.setOnClickListener { launchGameQuarter(3, gameId) }
         scoreQ3T2View.setOnClickListener { launchGameQuarter(3, gameId) }
+        findViewById<LinearLayout>(R.id.Q3ScoreContainer).setOnClickListener { launchGameQuarter(3, gameId) }
 
         quarter4Nav = findViewById(R.id.Quarter4Title)
         quarter4Nav.setOnClickListener { launchGameQuarter(4, gameId) }
         scoreQ4T1View.setOnClickListener { launchGameQuarter(4, gameId) }
         scoreQ4T2View.setOnClickListener { launchGameQuarter(4, gameId) }
+        findViewById<LinearLayout>(R.id.Q4ScoreContainer).setOnClickListener { launchGameQuarter(4, gameId) }
     }
 
     private fun launchGameQuarter(quarter: Int, gameId: Long) {

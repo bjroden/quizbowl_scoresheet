@@ -49,6 +49,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
+        style="@style/score_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

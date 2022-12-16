@@ -43,6 +43,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
+        style="@style/score_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -107,6 +108,8 @@
             android:textSize="24sp" />
 
         <LinearLayout
+            android:id="@+id/Q1ScoreContainer"
+            style="@style/score_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -163,6 +166,8 @@
             android:textSize="24sp" />
 
         <LinearLayout
+            android:id="@+id/Q2ScoreContainer"
+            style="@style/score_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -219,6 +224,8 @@
             android:textSize="24sp" />
 
         <LinearLayout
+            android:id="@+id/Q3ScoreContainer"
+            style="@style/score_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -275,6 +282,8 @@
             android:textSize="24sp" />
 
         <LinearLayout
+            android:id="@+id/Q4ScoreContainer"
+            style="@style/score_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

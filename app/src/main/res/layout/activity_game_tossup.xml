@@ -21,12 +21,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:hint="Quarter Score">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tossupRoundScoreTeam1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:gravity="center" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -36,12 +38,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:hint="Quarter Score">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tossupRoundScoreTeam2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:gravity="center" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,6 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="center"
             android:paddingHorizontal="10dp"
             android:text="Team A"
             android:textSize="24sp" />
@@ -73,6 +78,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="center"
             android:paddingHorizontal="10dp"
             android:text="Team B"
             android:textSize="24sp" />
@@ -83,6 +89,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="Quarter "
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

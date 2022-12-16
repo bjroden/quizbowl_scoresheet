@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="center"
             android:inputType="textPersonName"
             android:paddingHorizontal="10dp"
             android:text="Team A"
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="center"
             android:inputType="textPersonName"
             android:paddingHorizontal="10dp"
             android:text="Team B"
@@ -57,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:hint="Total Score">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -65,7 +68,8 @@
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:cursorVisible="false"
-                android:focusable="false" />
+                android:focusable="false"
+                android:gravity="center" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,6 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:hint="Total Score">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -83,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:clickable="false"
                 android:cursorVisible="false"
-                android:focusable="false" />
+                android:focusable="false"
+                android:gravity="center" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -102,6 +108,7 @@
             android:id="@+id/Quarter1Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:paddingHorizontal="10dp"
             android:paddingTop="5dp"
             android:text="Quarter 1"
@@ -124,6 +131,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="Subtotal">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -132,7 +140,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:cursorVisible="false"
-                    android:focusable="false" />
+                    android:focusable="false"
+                    android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,6 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="Subtotal">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -150,7 +160,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:cursorVisible="false"
-                    android:focusable="false" />
+                    android:focusable="false"
+                    android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -160,6 +171,7 @@
             android:id="@+id/Quarter2Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:paddingHorizontal="10dp"
             android:paddingTop="5dp"
             android:text="Quarter 2"
@@ -182,6 +194,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="Subtotal">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -190,7 +203,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:cursorVisible="false"
-                    android:focusable="false" />
+                    android:focusable="false"
+                    android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -200,6 +214,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="Subtotal">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -208,7 +223,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:cursorVisible="false"
-                    android:focusable="false" />
+                    android:focusable="false"
+                    android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -218,6 +234,7 @@
             android:id="@+id/Quarter3Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:paddingHorizontal="10dp"
             android:paddingTop="5dp"
             android:text="Quarter 3"
@@ -240,6 +257,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="Subtotal">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -248,7 +266,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:cursorVisible="false"
-                    android:focusable="false" />
+                    android:focusable="false"
+                    android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -258,6 +277,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="Subtotal">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -266,7 +286,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:cursorVisible="false"
-                    android:focusable="false" />
+                    android:focusable="false"
+                    android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -276,6 +297,7 @@
             android:id="@+id/Quarter4Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:paddingHorizontal="10dp"
             android:paddingTop="5dp"
             android:text="Quarter 4"
@@ -298,6 +320,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="Subtotal">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -306,7 +329,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:cursorVisible="false"
-                    android:focusable="false" />
+                    android:focusable="false"
+                    android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -316,6 +340,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:hint="Subtotal">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -324,7 +349,8 @@
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:cursorVisible="false"
-                    android:focusable="false" />
+                    android:focusable="false"
+                    android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

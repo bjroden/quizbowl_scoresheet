@@ -38,9 +38,9 @@ class GameWithTeamAdapter (
             team2Score.setText(gameWithTeams.game.team2SavedScore.toString())
             team1Name.setText(gameWithTeams.team1?.name ?: "Team 1 Not found")
             team2Name.setText(gameWithTeams.team2?.name ?: "Team 2 Not found")
-            gameLayout.setOnClickListener {
-                gameSelected(gameWithTeams.game)
-            }
+            gameLayout.setOnClickListener { gameSelected(gameWithTeams.game) }
+            team1Score.setOnClickListener { gameSelected(gameWithTeams.game) }
+            team2Score.setOnClickListener { gameSelected(gameWithTeams.game) }
         }
 
         companion object {

@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="center"
             android:paddingHorizontal="10dp"
             android:text="Team A"
             android:textSize="28sp" />
@@ -31,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="10"
+            android:gravity="center"
             android:paddingHorizontal="10dp"
             android:text="Team B"
             android:textSize="28sp" />
@@ -38,6 +40,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
+        style="@style/score_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -51,12 +54,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:hint="Total Score">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loadGameTeam1Score"
+                style="@style/disable_click"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -67,12 +73,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:hint="Total Score">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/loadGameTeam2Score"
+                style="@style/disable_click"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:inputType="none" />
 
         </com.google.android.material.textfield.TextInputLayout>

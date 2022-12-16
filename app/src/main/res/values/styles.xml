@@ -4,4 +4,9 @@
         <item name="android:divider">@drawable/empty_score_divider</item>
         <item name="android:showDividers">middle|beginning|end</item>
     </style>
+    <style name="disable_click">
+        <item name="android:clickable">false</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:focusable">false</item>
+    </style>
 </resources>

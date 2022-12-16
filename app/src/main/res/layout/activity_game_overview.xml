@@ -64,11 +64,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/overviewScoreTotalT1"
+                style="@style/disable_click"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
                 android:gravity="center" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -84,11 +82,9 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/overviewScoreTotalT2"
+                style="@style/disable_click"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:clickable="false"
-                android:cursorVisible="false"
-                android:focusable="false"
                 android:gravity="center" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -136,11 +132,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/overviewScoreQ1T1"
+                    style="@style/disable_click"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
                     android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -156,11 +150,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/overviewScoreQ1T2"
+                    style="@style/disable_click"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
                     android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -199,11 +191,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/overviewScoreQ2T1"
+                    style="@style/disable_click"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
                     android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -219,11 +209,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/overviewScoreQ2T2"
+                    style="@style/disable_click"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
                     android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -262,11 +250,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/overviewScoreQ3T1"
+                    style="@style/disable_click"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
                     android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -282,11 +268,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/overviewScoreQ3T2"
+                    style="@style/disable_click"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
                     android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -325,11 +309,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/overviewScoreQ4T1"
+                    style="@style/disable_click"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
                     android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -345,11 +327,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/overviewScoreQ4T2"
+                    style="@style/disable_click"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
                     android:gravity="center" />
 
             </com.google.android.material.textfield.TextInputLayout>

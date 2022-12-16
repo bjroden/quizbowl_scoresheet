@@ -26,6 +26,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/bonusRoundScoreTeam1"
+                style="@style/disable_click"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center" />
@@ -43,6 +44,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/bonusRoundScoreTeam2"
+                style="@style/disable_click"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center" />

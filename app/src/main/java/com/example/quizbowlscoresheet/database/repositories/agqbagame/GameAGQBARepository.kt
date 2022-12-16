@@ -101,6 +101,14 @@ class GameAGQBARepository(
         gameDao.updateGame(newGame)
     }
 
+    suspend fun deleteGame(game: Game) = gameDao.deleteGame(game)
+
+    suspend fun deleteGameList(games: List<Game>) = database.withTransaction {
+        for (game in games) {
+            gameDao.deleteGame(game)
+        }
+    }
+
     private fun blankBonusCategories(gameId: Long) = (1..4).map { categoryNumber ->
             BonusCategoryInfo(
                 null,

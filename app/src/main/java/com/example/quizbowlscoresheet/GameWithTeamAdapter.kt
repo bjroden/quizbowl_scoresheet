@@ -43,6 +43,7 @@ class GameWithTeamAdapter (
             team2Name.setText(gameWithTeams.team2?.name ?: "Team 2 Not found")
             val date = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(gameWithTeams.game.createdAt)
             gameName.text = "Game at $date"
+            gameName.setOnClickListener { gameSelected(gameWithTeams.game) }
             gameLayout.setOnClickListener { gameSelected(gameWithTeams.game) }
             team1Score.setOnClickListener { gameSelected(gameWithTeams.game) }
             team2Score.setOnClickListener { gameSelected(gameWithTeams.game) }

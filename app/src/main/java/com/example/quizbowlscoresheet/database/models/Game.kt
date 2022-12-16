@@ -29,6 +29,8 @@ data class Game (
 
     val team2Id: Long?,
 
+    val createdAt: Long,
+
     val team1SavedScore: Int,
 
     val team2SavedScore: Int

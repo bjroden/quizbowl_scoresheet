@@ -1,5 +1,7 @@
 package com.example.quizbowlscoresheet
 
+import android.icu.text.DateFormat
+import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,12 +34,15 @@ class GameWithTeamAdapter (
         val team2Score: TextInputEditText = itemView.findViewById(R.id.loadGameTeam2Score)
         val team1Name: MaterialTextView = itemView.findViewById(R.id.TeamAName)
         val team2Name: MaterialTextView = itemView.findViewById(R.id.TeamBName)
+        val gameName: MaterialTextView = itemView.findViewById(R.id.gameName)
 
         fun bind(gameWithTeams: GameWithTeams, gameSelected: (game: Game) -> Unit) {
             team1Score.setText(gameWithTeams.game.team1SavedScore.toString())
             team2Score.setText(gameWithTeams.game.team2SavedScore.toString())
             team1Name.setText(gameWithTeams.team1?.name ?: "Team 1 Not found")
             team2Name.setText(gameWithTeams.team2?.name ?: "Team 2 Not found")
+            val date = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT).format(gameWithTeams.game.createdAt)
+            gameName.text = "Game at $date"
             gameLayout.setOnClickListener { gameSelected(gameWithTeams.game) }
             team1Score.setOnClickListener { gameSelected(gameWithTeams.game) }
             team2Score.setOnClickListener { gameSelected(gameWithTeams.game) }

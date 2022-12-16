@@ -13,4 +13,9 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Theme.LoadGameToolbar" parent="Theme.QuizBowlScoresheet">
+        <item name="colorPrimary">#121212</item>
+        <item name="colorOnPrimary">#121212</item>
+    </style>
 </resources>

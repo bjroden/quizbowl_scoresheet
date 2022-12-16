@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Quiz Bowl Scoresheet</string>
     <string name="new_game_btn_text">New Game</string>
+    <string name="toolbar_delete_mode">Select a game to delete</string>
+    <string name="confirm_delete_title">Confirm Deletion</string>
+    <string name="confirm_delete_body">Are you sure you want to PERMANENTLY delete this game?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 </resources>
